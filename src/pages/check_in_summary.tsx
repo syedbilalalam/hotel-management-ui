@@ -1,7 +1,8 @@
-import { Btn } from '@src/assets/components/btn';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkedInRooms, bookedRooms, BOOKED_ROOM, CHECKED_IN_ROOM } from '@src/assets/components/db';
+import { Btn } from '@src/assets/components/btn';
+import type { RoomDb } from '@src/main';
+import { BOOKED_ROOM, CHECKED_IN_ROOM, type BookedRoom, type CheckedInRoom } from '@src/assets/components/db';
 // Importing page styling
 import '@src/assets/styles/global.css';
 import '@src/assets/styles/check_in.css';
@@ -11,6 +12,12 @@ export interface CheckInSummaryProps {
     roomNo: number;
 }
 
+interface CheckInRootProps {
+    props: CheckInSummaryProps | null;
+    checkedInRooms: RoomDb<CheckedInRoom>
+    bookedRooms: RoomDb<BookedRoom>
+}
+
 interface CheckInData {
     name: string;
     duration: number;
@@ -18,7 +25,7 @@ interface CheckInData {
     checkinDate: string;
 }
 
-export default function Page({ props }: { props: CheckInSummaryProps | null }) {
+export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRootProps) {
     const nav = useNavigate();
 
     const [checkinData, setCheckInData] = useState<CheckInData | null>(null);

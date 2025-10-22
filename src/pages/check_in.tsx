@@ -1,11 +1,12 @@
-import { Btn } from '@src/assets/components/btn';
 import { useState, useRef } from 'react';
+import type { RoomDb } from '@src/main';
 import { useNavigate } from 'react-router-dom';
-import { checkedInRooms, bookedRooms, BOOKED_ROOM, ROOM_PRICE, hotelRooms, HOTEL_ROOM, ROOM_TYPE } from '@src/assets/components/db';
+import { Btn } from '@src/assets/components/btn';
+import type { CheckInSummaryProps } from '@src/pages/check_in_summary';
+import { BOOKED_ROOM, ROOM_PRICE, HOTEL_ROOM, ROOM_TYPE, type CheckedInRoom, type BookedRoom, type HotelRoom } from '@src/assets/components/db';
 // Importing page styling
 import '@src/assets/styles/check_in.css';
 import '@src/assets/styles/global.css';
-import type { CheckInSummaryProps } from '@src/pages/check_in_summary';
 
 export function meta() {
     return [
@@ -16,9 +17,12 @@ export function meta() {
 
 interface CheckinProps {
     setSummaryProps: (val: CheckInSummaryProps) => void;
+    checkedInRooms: RoomDb<CheckedInRoom>;
+    bookedRooms: RoomDb<BookedRoom>;
+    hotelRooms: RoomDb<HotelRoom>;
 }
 
-export default function Page({ setSummaryProps }: CheckinProps) {
+export default function Page({ setSummaryProps, checkedInRooms, bookedRooms, hotelRooms }: CheckinProps) {
     const nav = useNavigate();
 
     const [checkinDate, setCheckInDate] = useState('');

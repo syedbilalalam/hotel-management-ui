@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { Btn } from '@src/assets/components/btn';
 import {
     HOTEL_ROOM,
-    hotelRooms,
     ROOM_STATUS, 
+    type HotelRoom, 
     type ROOM_TYPE
 } from '@src/assets/components/db';
 
 // Importing page styling
 import '@src/assets/styles/available_rooms.css';
 import '@src/assets/styles/global.css';
+import type { RoomDb } from '@src/main';
 
 type RoomsList = {
     number: number;
@@ -26,7 +27,11 @@ export function meta() {
     ];
 }
 
-export default function Page() {
+interface AvailableRoomProps {
+    hotelRooms: RoomDb<HotelRoom>;
+}
+
+export default function Page({hotelRooms}: AvailableRoomProps) {
     const [roomsData, setRoomsData] = useState<RoomsList>([]);
 
     useEffect(() => {

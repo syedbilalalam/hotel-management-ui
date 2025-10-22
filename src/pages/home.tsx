@@ -1,7 +1,7 @@
 import { Btn } from '@src/assets/components/btn';
 // Page styleing
-import '../assets/styles/home.css';
-import '../assets/styles/global.css';
+import '@src/assets/styles/home.css';
+import '@src/assets/styles/global.css';
 
 export function meta() {
     return [
@@ -11,7 +11,7 @@ export function meta() {
 }
 
 export default function Page() {
-    
+
     return (
         <>
             <div className="container home">

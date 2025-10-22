@@ -27,7 +27,7 @@ export type HotelRoom = [
     ROOM_TYPE,
     ROOM_STATUS
 ]
-type RoomNumber = number;
+export type RoomNumber = number;
 
 export enum BOOKED_ROOM {
     NAME,
@@ -57,21 +57,3 @@ export type CheckedInRoom = [
     number,
     string
 ];
-
-const hotelRooms = new Map<RoomNumber, HotelRoom>();
-
-
-AVAILABLE_ROOMS.forEach((roomNo) => {
-    const bytesArr = new Uint8Array(1);
-    crypto.getRandomValues(bytesArr);
-    let roomType = 0;
-    if (bytesArr[0] % 2 === 0) roomType = 1;
-    hotelRooms.set(roomNo, [roomType, ROOM_STATUS.AVAILABLE]);
-});
-
-const bookedRooms = new Map<RoomNumber, BookedRoom>();
-
-const checkedInRooms = new Map<RoomNumber, CheckedInRoom>();
-
-
-export { hotelRooms, bookedRooms, checkedInRooms };

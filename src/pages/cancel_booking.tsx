@@ -1,11 +1,12 @@
 import { Btn } from '@src/assets/components/btn';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { hotelRooms, bookedRooms, HOTEL_ROOM, ROOM_STATUS } from '@src/assets/components/db';
+import { HOTEL_ROOM, ROOM_STATUS, type BookedRoom, type HotelRoom } from '@src/assets/components/db';
 
 // Importing page styling
 import '@src/assets/styles/cancel_booking.css';
 import '@src/assets/styles/global.css';
+import type { RoomDb } from '@src/main';
 
 export function meta() {
     return [
@@ -14,7 +15,12 @@ export function meta() {
     ];
 }
 
-export default function Page() {
+interface CancelBookingProps {
+    bookedRooms: RoomDb<BookedRoom>;
+    hotelRooms: RoomDb<HotelRoom>;
+}
+
+export default function Page({bookedRooms, hotelRooms}: CancelBookingProps) {
     const nav = useNavigate();
 
     const [roomNo, setRoomNo] = useState<number | null>(null);

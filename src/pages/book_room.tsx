@@ -2,14 +2,15 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Btn } from '@src/assets/components/btn';
 import {
-    hotelRooms,
-    bookedRooms,
     MARRIAGE_STATUS,
     HOTEL_ROOM,
     ROOM_STATUS,
     ROOM_TYPE,
-    ROOM_PRICE
+    ROOM_PRICE,
+    type HotelRoom,
+    type BookedRoom
 } from '@src/assets/components/db';
+import type { RoomDb } from '@src/main';
 
 // Importing page styling
 import '@src/assets/styles/book_room.css';
@@ -24,7 +25,12 @@ export function meta() {
     ];
 }
 
-export default function Page() {
+interface BookRoomProps {
+    hotelRooms: RoomDb<HotelRoom>
+    bookedRooms: RoomDb<BookedRoom>
+}
+
+export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
     const nav = useNavigate();
 
     const [roomNumber, setRoomNumber] = useState<number | null>(null);

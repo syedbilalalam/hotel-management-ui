@@ -1,10 +1,11 @@
 import { Btn } from '@src/assets/components/btn';
-import { bookedRooms, BOOKED_ROOM, type BookedRoom, ROOM_TYPE, hotelRooms, HOTEL_ROOM, ROOM_PRICE } from '@src/assets/components/db';
+import { BOOKED_ROOM, type BookedRoom, ROOM_TYPE, HOTEL_ROOM, ROOM_PRICE, type HotelRoom } from '@src/assets/components/db';
 import { useEffect, useState } from 'react';
 
 // Importing page styling
 import '@src/assets/styles/booked_rooms.css';
 import '@src/assets/styles/global.css';
+import type { RoomDb } from '@src/main';
 
 type BookedRooms = {
     name: BookedRoom[BOOKED_ROOM.NAME];
@@ -23,7 +24,13 @@ export function meta() {
     ];
 }
 
-export default function Page() {
+interface BookedRoomsProps {
+    bookedRooms: RoomDb<BookedRoom>;
+    hotelRooms: RoomDb<HotelRoom>;
+}
+
+
+export default function Page({bookedRooms, hotelRooms}: BookedRoomsProps) {
     const [rooms, setRooms] = useState<BookedRooms>([]);
 
     useEffect(() => {
