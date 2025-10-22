@@ -10,7 +10,11 @@ export function meta() {
     ];
 }
 
-export default function Page() {
+interface HomePageProps {
+    setLoginState: (val: boolean) => void;
+}
+
+export default function Page({ setLoginState }: HomePageProps) {
 
     return (
         <>
@@ -52,9 +56,9 @@ export default function Page() {
                     <button
                         className="btn exit-btn"
                         onClick={() => {
-                            console.log('User wants to exit this app');
+                            setLoginState(false);
                         }}
-                    >Exit</button>
+                    >Logout</button>
                 </div>
             </div>
         </>
