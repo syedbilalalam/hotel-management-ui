@@ -1,6 +1,11 @@
-import { Btn } from '@src/assets/components/btn';
-import { hotelRooms, ROOM_RECORD, ROOM_STATUS, type ROOM_TYPE } from '@src/assets/components/db';
 import { useState, useEffect } from 'react';
+import { Btn } from '@src/assets/components/btn';
+import {
+    HOTEL_ROOM,
+    hotelRooms,
+    ROOM_STATUS, 
+    type ROOM_TYPE
+} from '@src/assets/components/db';
 
 // Importing page styling
 import '@src/assets/styles/available_rooms.css';
@@ -30,8 +35,8 @@ export default function Page() {
         for (const [key, value] of hotelRooms)
             newRoomsData.push({
                 number: key,
-                type: value[ROOM_RECORD.ROOM_TYPE],
-                status: value[ROOM_RECORD.ROOM_STATUS]
+                type: value[HOTEL_ROOM.TYPE],
+                status: value[HOTEL_ROOM.STATUS]
             });
 
         setRoomsData(newRoomsData);

@@ -1,4 +1,5 @@
 import { Btn } from '@src/assets/components/btn';
+import { hotelRooms,  } from '@src/assets/components/db';
 
 // Importing page styling
 import '@src/assets/styles/cancel_booking.css';

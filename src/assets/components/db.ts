@@ -9,14 +9,9 @@ export enum ROOM_STATUS {
     BOOKED
 }
 
-export enum ROOM_RECORD {
-    ROOM_TYPE,
-    ROOM_STATUS
-}
-
-export enum ROOM_RECORD_MAP_NAME {
-    ROOM_TYPE,
-    ROOM_STATUS
+export enum HOTEL_ROOM {
+    TYPE,
+    STATUS
 }
 
 export enum MARRIAGE_STATUS {
@@ -24,7 +19,7 @@ export enum MARRIAGE_STATUS {
     SINGLE
 }
 
-export type RoomRecord = [
+export type HotelRoom = [
     ROOM_TYPE,
     ROOM_STATUS
 ]
@@ -40,7 +35,7 @@ export type BookedRoomsMap = [
 
 
 
-const hotelRooms = new Map<RoomNumber, RoomRecord>();
+const hotelRooms = new Map<RoomNumber, HotelRoom>();
 
 
 AVAILABLE_ROOMS.forEach((roomNo) => {

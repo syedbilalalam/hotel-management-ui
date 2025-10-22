@@ -5,7 +5,7 @@ import {
     hotelRooms,
     bookedRooms,
     MARRIAGE_STATUS,
-    ROOM_RECORD_MAP_NAME,
+    HOTEL_ROOM,
     ROOM_STATUS,
     ROOM_TYPE
 } from '@src/assets/components/db';
@@ -62,7 +62,7 @@ export default function Page() {
         }
 
         // Verifying room type
-        if (marriageStatus === 'Married' && hotelRoom[ROOM_RECORD_MAP_NAME.ROOM_TYPE] === ROOM_TYPE.SINGLE) {
+        if (marriageStatus === 'Married' && hotelRoom[HOTEL_ROOM.TYPE] === ROOM_TYPE.SINGLE) {
             alert("This room capacity is only for single person try other rooms");
             return;
         }
@@ -77,7 +77,7 @@ export default function Page() {
         ]);
 
         // Updating hotel room var
-        hotelRoom[ROOM_RECORD_MAP_NAME.ROOM_STATUS] = ROOM_STATUS.BOOKED;
+        hotelRoom[HOTEL_ROOM.STATUS] = ROOM_STATUS.BOOKED;
 
         alert('Sucessfully booked');
 
@@ -95,7 +95,7 @@ export default function Page() {
             return;
         }
         let roomValue = 30;
-        const roomType = hotelRoom[ROOM_RECORD_MAP_NAME.ROOM_TYPE];
+        const roomType = hotelRoom[HOTEL_ROOM.TYPE];
         if (roomType === ROOM_TYPE.DOUBLE) roomValue = 100;
 
         const finalCalc = roomValue * days;
