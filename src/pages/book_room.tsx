@@ -7,7 +7,8 @@ import {
     MARRIAGE_STATUS,
     HOTEL_ROOM,
     ROOM_STATUS,
-    ROOM_TYPE
+    ROOM_TYPE,
+    ROOM_PRICE
 } from '@src/assets/components/db';
 
 // Importing page styling
@@ -94,9 +95,9 @@ export default function Page() {
             alert('Please enter a valid room no.');
             return;
         }
-        let roomValue = 30;
+        let roomValue = ROOM_PRICE.SINGLE;
         const roomType = hotelRoom[HOTEL_ROOM.TYPE];
-        if (roomType === ROOM_TYPE.DOUBLE) roomValue = 100;
+        if (roomType === ROOM_TYPE.DOUBLE) roomValue = ROOM_PRICE.DOUBLE;
 
         const finalCalc = roomValue * days;
 
