@@ -23,6 +23,26 @@ import {
 
 export type RoomDb<T> = Map<RoomNumber, T>;
 
+function saveAppInfo(name: string, map: Map<number, unknown>) {
+    const obj = [[...map.keys()], [...map.values()]];
+    localStorage.setItem(name, JSON.stringify(obj));
+}
+
+function retriveAppInfo(name: string): Map<number, unknown> | null {
+    const appData = localStorage.getItem(name);
+
+    if (appData !== null) {
+        
+        const obj = JSON.parse(appData) as [number[], unknown[]];
+        const h = new Map<number, unknown>();
+        obj[0].forEach((key, index) => {
+            h.set(key, obj[1][index]);
+        })
+        
+        return h;
+    }
+    return null;
+}
 
 function Main() {
     const [checkinSummaryProps, setCheckinSummaryProps] = useState<CheckInSummaryProps | null>(null);
@@ -37,7 +57,6 @@ function Main() {
 
 
     useEffect(() => {
-
         hotelRooms.current = new Map<RoomNumber, HotelRoom>();
 
 
@@ -50,8 +69,26 @@ function Main() {
         });
 
         bookedRooms.current = new Map<RoomNumber, BookedRoom>();
-
+        
         checkedInRooms.current = new Map<RoomNumber, CheckedInRoom>();
+
+        
+        const saved = {
+            hotelrooms: retriveAppInfo('hotelrooms'),
+            bookedrooms: retriveAppInfo('bookedrooms'),
+            checkedinrooms: retriveAppInfo('checkinrooms')
+        }
+
+        if(saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms as any;
+        if(saved.bookedrooms !== null) hotelRooms.current = saved.bookedrooms as any;
+        if(saved.checkedinrooms !== null) hotelRooms.current = saved.checkedinrooms as any;
+
+
+        setInterval(() => {
+            saveAppInfo('hotelrooms', hotelRooms.current!)
+            saveAppInfo('bookedrooms', hotelRooms.current!)
+            saveAppInfo('checkinrooms', hotelRooms.current!)
+        }, 1000);
 
         setRenderApp(true);
     }, []);
