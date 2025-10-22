@@ -46,6 +46,18 @@ export type BookedRoom = [
 ]
 
 
+export enum CHECKED_IN_ROOM {
+    DURATION,
+    COST,
+    DATE,
+}
+
+export type CheckedInRoom = [
+    number,
+    number,
+    string
+];
+
 const hotelRooms = new Map<RoomNumber, HotelRoom>();
 
 
@@ -59,4 +71,7 @@ AVAILABLE_ROOMS.forEach((roomNo) => {
 
 const bookedRooms = new Map<RoomNumber, BookedRoom>();
 
-export { hotelRooms, bookedRooms };
+const checkedInRooms = new Map<RoomNumber, CheckedInRoom>();
+
+
+export { hotelRooms, bookedRooms, checkedInRooms };
