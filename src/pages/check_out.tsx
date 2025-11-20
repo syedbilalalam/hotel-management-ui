@@ -6,8 +6,8 @@ import type { CheckoutSummaryProps } from '@src/pages/checkout_summary';
 import { BOOKED_ROOM, CHECKED_IN_ROOM, HOTEL_ROOM, ROOM_STATUS, type BookedRoom, type CheckedInRoom, type HotelRoom } from '@src/assets/components/db';
 
 // Importing page styling
-import '@src/assets/styles/check_out.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/check_out.css';
+// import '@src/assets/styles/global.css';
 
 export function meta() {
     return [

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { HOTEL_ROOM, ROOM_STATUS, type BookedRoom, type HotelRoom } from '@src/assets/components/db';
 
 // Importing page styling
-import '@src/assets/styles/cancel_booking.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/cancel_booking.css';
+// import '@src/assets/styles/global.css';
 import type { RoomDb } from '@src/main';
 
 export function meta() {

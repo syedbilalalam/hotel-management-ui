@@ -3,8 +3,8 @@ import { BOOKED_ROOM, type BookedRoom, ROOM_TYPE, HOTEL_ROOM, ROOM_PRICE, type H
 import { useEffect, useState } from 'react';
 
 // Importing page styling
-import '@src/assets/styles/booked_rooms.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/booked_rooms.css';
+// import '@src/assets/styles/global.css';
 import type { RoomDb } from '@src/main';
 
 type BookedRooms = {

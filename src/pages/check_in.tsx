@@ -5,8 +5,8 @@ import { Btn } from '@src/assets/components/btn';
 import type { CheckInSummaryProps } from '@src/pages/check_in_summary';
 import { BOOKED_ROOM, ROOM_PRICE, HOTEL_ROOM, ROOM_TYPE, type CheckedInRoom, type BookedRoom, type HotelRoom } from '@src/assets/components/db';
 // Importing page styling
-import '@src/assets/styles/check_in.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/check_in.css';
+// import '@src/assets/styles/global.css';
 
 export function meta() {
     return [

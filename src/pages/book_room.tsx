@@ -13,8 +13,8 @@ import {
 import type { RoomDb } from '@src/main';
 
 // Importing page styling
-import '@src/assets/styles/book_room.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/book_room.css';
+// import '@src/assets/styles/global.css';
 
 type MarriageTypeSelection = 'Single' | 'Married';
 

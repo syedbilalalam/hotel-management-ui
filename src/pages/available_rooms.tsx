@@ -8,8 +8,8 @@ import {
 } from '@src/assets/components/db';
 
 // Importing page styling
-import '@src/assets/styles/available_rooms.css';
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/available_rooms.css';
+// import '@src/assets/styles/global.css';
 import type { RoomDb } from '@src/main';
 
 type RoomsList = {

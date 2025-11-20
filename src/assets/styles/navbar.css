@@ -1,0 +1,72 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+nav .title .imageHolder {
+    height: 70px;
+}
+nav .title .texts{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--dark-blue);
+}
+nav .title .texts p {
+    margin: 0;
+}
+
+nav .options {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+nav .options .logout {
+    background-color: var(--orange);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 18px;
+    gap: 5px;
+}
+nav .options .ico {
+    height: 20px;
+}
+
+nav .options .account .ico {
+    height: 38px;
+}
+
+/* Global level class */
+.defaultBtn {
+    border: none;
+    outline: none;
+}
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: unset;
+}
+.imageHolder img{
+    height: 100%;
+}
+
+* {
+    font-family: inter;
+}
+:root {
+  --dark-blue: #193E80;   /* your color variable */
+  --text-color: #222222;
+  --orange: #FF4800;
+}

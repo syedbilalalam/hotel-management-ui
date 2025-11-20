@@ -1,7 +1,7 @@
 import { Btn } from '@src/assets/components/btn';
 
 // Importing styles
-import '@src/assets/styles/global.css';
+// import '@src/assets/styles/global.css';
 
 export interface CheckoutSummaryProps {
     name: string;

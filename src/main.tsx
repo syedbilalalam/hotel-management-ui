@@ -1,7 +1,7 @@
 import { StrictMode, useState, useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './index.css'
+// import './index.css'
 import Home from '@src/pages/home';
 import AvailableRooms from '@src/pages/available_rooms';
 import BookRoom from '@src/pages/book_room';
@@ -98,7 +98,7 @@ function Main() {
 
 
     return (
-        !loginState ? (
+        loginState ? (
             <Login setLoginState={setLoginState} />
         ) : renderApp ? (
 

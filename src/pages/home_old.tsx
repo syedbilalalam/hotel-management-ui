@@ -1,7 +1,7 @@
 import { Btn } from '@src/assets/components/btn';
-import Navbar from '@src/pages/components/navbar';
 // Page styleing
 // import '@src/assets/styles/home.css';
+// import '@src/assets/styles/global.css';
 
 export function meta() {
     return [
@@ -18,7 +18,6 @@ export default function Page({ setLoginState }: HomePageProps) {
 
     return (
         <>
-            <Navbar />
             <div className="container home">
                 <div className="header">
                     <h1>The Castle of Programmers</h1>
