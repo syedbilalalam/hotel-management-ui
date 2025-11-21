@@ -2,6 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 nav .title {
     display: flex;
@@ -9,12 +10,12 @@ nav .title {
     gap: 10px;
 }
 nav .title .imageHolder {
-    height: 70px;
+    height: 58px;
 }
 nav .title .texts{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0;
     font-weight: bold;
     font-size: 20px;
     color: var(--dark-blue);
@@ -36,18 +37,21 @@ nav .options .logout {
     align-items: center;
     padding: 8px;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 14px;
     gap: 5px;
 }
-nav .options .ico {
-    height: 20px;
+nav .options .logout .ico {
+    height: 18px;
 }
 
 nav .options .account .ico {
-    height: 38px;
+    height: 32px;
 }
 
 /* Global level class */
+body {
+    padding: 10px;
+}
 .defaultBtn {
     border: none;
     outline: none;
@@ -67,6 +71,7 @@ nav .options .account .ico {
 }
 :root {
   --dark-blue: #193E80;   /* your color variable */
+  --light-blue: #73DDFF;
   --text-color: #222222;
   --orange: #FF4800;
 }

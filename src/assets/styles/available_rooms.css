@@ -1,0 +1,50 @@
+.availableRooms .tbl {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.availableRooms .tbl th {
+    color: var(--dark-blue);
+    background-color: var(--light-blue);
+    padding: 14px;
+    border-radius: 16px;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.availableRooms .tbl .roomNo {
+    width: 50%;
+}
+.availableRooms .tbl tr {
+    display: flex;
+    gap: 14px;
+}
+
+.availableRooms .tbl td {
+    /* background-color: pink; */
+    padding: 14px;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    border-right: 1px solid var(--dark-blue);
+    font-size: 16px;
+}
+
+.availableRooms .tbl .right {
+    text-align: right;
+}
+
+/* Room Type Value Component css */
+.roomTypeValue {
+    display: flex;
+    justify-self: right;
+    align-items: center;
+    gap: 4px;
+}
+.roomTypeValue .ico {
+    height: 26px;
+}

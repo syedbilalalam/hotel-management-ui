@@ -1,7 +1,7 @@
 import { Btn } from '@src/assets/components/btn';
 import '@src/assets/styles/navbar.css';
 
-export default function Page() {
+export default function Component() {
     return (
         <>
             <nav>

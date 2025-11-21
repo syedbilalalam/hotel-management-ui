@@ -3,3 +3,40 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Home title */
+.homeTitle {
+    margin: 52px 4px;
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    font-size: 24px;
+}
+
+/* Cards */
+.cardsHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardsHolder .card {
+    height: 180px;
+    width: 160px;
+    background-color: var(--light-blue);
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 10px;
+    flex-shrink: 0;
+    color: var(--dark-blue);
+}

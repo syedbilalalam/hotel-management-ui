@@ -1,0 +1,25 @@
+.pageTitle {
+    margin: 80px 0 0 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pageTitle .icoBorder {
+    border: 2px solid var(--dark-blue);
+    padding: 2px;
+    width: fit-content;
+    border-radius: 4px;
+}
+
+.pageTitle .ico {
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.pageTitle .text{
+    font-size: 24px;
+}
