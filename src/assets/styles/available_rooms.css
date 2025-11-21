@@ -1,9 +1,12 @@
 .availableRooms .tbl {
     width: 100%;
     margin-top: 40px;
+}
+.availableRooms .tbl tbody, .availableRooms .tbl thead {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
 }
 .availableRooms .tbl th {
     color: var(--dark-blue);
@@ -39,12 +42,19 @@
 }
 
 /* Room Type Value Component css */
-.roomTypeValue {
+.roomTypeValue, .roomStatusValue {
     display: flex;
     justify-self: right;
     align-items: center;
     gap: 4px;
 }
-.roomTypeValue .ico {
+.roomTypeValue .ico, .roomStatusValue .ico {
     height: 26px;
+}
+
+.roomStatusValue .available {
+    color: var(--green);
+}
+.roomStatusValue .booked {
+    color: var(--orange);
 }

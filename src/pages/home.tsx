@@ -27,11 +27,12 @@ function Title() {
 interface CardProps {
     text: string;
     iconUrl: string;
+    linksTo: string;
 }
 
-function Card({text, iconUrl}: CardProps) {
+function Card({text, iconUrl, linksTo}: CardProps) {
     return (
-        <Btn to={'/available-rooms'} className={'card btn'}>
+        <Btn to={linksTo} className={'card btn'}>
             <div className={'ico imageHolder'}>
                 <img src={iconUrl} alt={'icon'} />
             </div>
@@ -43,12 +44,36 @@ function Card({text, iconUrl}: CardProps) {
 function CardsHolder() {
     return (
         <div className={'cardsHolder'}>
-            <Card text={'Display Available Rooms'} iconUrl={'/icons/svg/bedroom_parent.svg'} />
-            <Card text={'Book A Room'} iconUrl={'/icons/svg/bookmark_add.svg'} />
-            <Card text={'Cancel Booking'} iconUrl={'/icons/svg/bookmark_remove.svg'} />
-            <Card text={'Booked Rooms'} iconUrl={'/icons/svg/book.svg'} />
-            <Card text={'Check In'} iconUrl={'/icons/svg/receipt_long.svg'} />
-            <Card text={'Checkout'} iconUrl={'/icons/svg/point_of_sale.svg'} />
+            <Card
+                text={'Display Available Rooms'}
+                iconUrl={'/icons/svg/bedroom_parent.svg'}
+                linksTo={'/available-rooms'}
+            />
+            <Card
+                text={'Book A Room'}
+                iconUrl={'/icons/svg/bookmark_add.svg'}
+                linksTo={'/'}
+            />
+            <Card
+                text={'Cancel Booking'}
+                iconUrl={'/icons/svg/bookmark_remove.svg'}
+                linksTo={'/'}
+            />
+            <Card
+                text={'Booked Rooms'}
+                iconUrl={'/icons/svg/book.svg'}
+                linksTo={'/'}
+            />
+            <Card
+                text={'Check In'}
+                iconUrl={'/icons/svg/receipt_long.svg'}
+                linksTo={'/'}
+            />
+            <Card
+                text={'Checkout'}
+                iconUrl={'/icons/svg/point_of_sale.svg'}
+                linksTo={'/'}
+            />
         </div>
     )
 }
