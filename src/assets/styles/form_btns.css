@@ -1,0 +1,22 @@
+.systemBtn.btn {
+    padding: 12px;
+    font-size: 16px;
+    width: 60%;
+    text-align: center;
+    border: 2px solid var(--dark-blue);
+}
+.primaryBtn.btn {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+}
+
+.secBtn.btn {
+    background-color: transparent;
+    color: var(--dark-blue);
+    width: 40%;
+}
+
+.formBtnPair {
+    display: flex;
+    gap: 10px;
+}

@@ -52,7 +52,7 @@ function CardsHolder() {
             <Card
                 text={'Book A Room'}
                 iconUrl={'/icons/svg/bookmark_add.svg'}
-                linksTo={'/'}
+                linksTo={'/book-room'}
             />
             <Card
                 text={'Cancel Booking'}

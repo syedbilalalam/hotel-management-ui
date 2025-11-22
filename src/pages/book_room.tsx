@@ -1,6 +1,12 @@
-import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Btn } from '@src/assets/components/btn';
+import Navbar from '@src/pages/components/navbar';
+import PageTitle from '@src/pages/components/page_title';
+import CenteredBody from '@src/pages/components/centered_body';
+import { FormBtnPair, PrimaryBtn, SecBtn } from '@src/pages/components/form_btns';
+import {
+    useState, useRef, useEffect,
+    type FormEventHandler, type ReactNode
+} from 'react';
 import {
     MARRIAGE_STATUS,
     HOTEL_ROOM,
@@ -13,8 +19,7 @@ import {
 import type { RoomDb } from '@src/main';
 
 // Importing page styling
-// import '@src/assets/styles/book_room.css';
-// import '@src/assets/styles/global.css';
+import '@src/assets/styles/book_room.css';
 
 type MarriageTypeSelection = 'Single' | 'Married';
 
@@ -28,6 +33,80 @@ export function meta() {
 interface BookRoomProps {
     hotelRooms: RoomDb<HotelRoom>
     bookedRooms: RoomDb<BookedRoom>
+}
+
+interface InputProps {
+    id: string;
+    title: string;
+    placeholder: string;
+    type?: 'text' | 'number' | 'password' | 'email';
+    width?: number;
+    onInput?: FormEventHandler<HTMLInputElement>;
+    required?: boolean;
+}
+interface SelectionProps {
+    id: string;
+    title: string;
+    children: ReactNode;
+    width?: number;
+    onInput?: FormEventHandler<HTMLSelectElement>;
+    required?: boolean;
+}
+
+function Selection({
+    id, title,
+    required = false,
+    onInput,
+    children,
+    ...props
+}: SelectionProps) {
+
+    const [maxWidth, setMaxWidth] = useState('340px');
+
+    useEffect(() => {
+        if (props.width) setMaxWidth(`${props.width}px`);
+    });
+
+    return (
+        <div className={'selectionHolder'}>
+            <label htmlFor={id}>{title}</label>
+            <select
+                id={id} style={{ maxWidth }}
+                onInput={onInput}
+                required={required}
+            >
+                {children}
+            </select>
+        </div>
+    )
+}
+function Input({
+    id, title,
+    placeholder,
+    type = 'text',
+    required = false,
+    onInput,
+    ...props
+}: InputProps) {
+
+    const [maxWidth, setMaxWidth] = useState('340px');
+
+    useEffect(() => {
+        if (props.width) setMaxWidth(`${props.width}px`);
+    });
+
+    return (
+        <div className={'inputHolder'}>
+            <label htmlFor={id}>{title}</label>
+            <input
+                id={id} type={type}
+                placeholder={placeholder}
+                style={{ maxWidth }}
+                onInput={onInput}
+                required={required}
+            />
+        </div>
+    )
 }
 
 export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
@@ -109,20 +188,19 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
 
         alert(`Total Cost: ${finalCalc}$`)
     }
-
     return (
-        <div className="container bookRoom">
-            <div className="header">
-                <h1>Book a Room</h1>
-            </div>
-            <form id="bookingForm" method="POST" ref={formElem}>
-                <div className="form-grid">
-                    <div className="form-group">
-                        <label htmlFor="room-number">Room Number:</label>
-                        <input
-                            id={'room-number'}
-                            type="number"
-                            min="1" placeholder="Enter Room Number"
+        <div className={'bookRoom'}>
+            <Navbar />
+            <CenteredBody maxWidth={600}>
+                <PageTitle parentPath={'/'} text={'Book a Room'} />
+                <form ref={formElem}>
+
+                    <div className={'requiredFields'}>
+
+                        <Input
+                            id={'roomNo'} title={'Room No'}
+                            placeholder={'Enter room no here'}
+                            type={'number'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
 
@@ -130,68 +208,57 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
                                 if (isNaN(numValue)) numValue = null;
                                 setRoomNumber(numValue);
                             }}
-                            required
+                            required={true}
                         />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="guest-name">Guest Name:</label>
-                        <input
-                            id={'guest-name'}
-                            type="text"
-                            placeholder="Enter Guest Name"
+
+                        <Input
+                            id={'guestName'} title={'Guest Name'}
+                            placeholder={'Enter your name here'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
                                 setGuestName(target.value);
                             }}
-                            required
+                            required={true}
                         />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone:</label>
-                        <input
-                            id={'phone'}
-                            type="tel"
-                            placeholder="Enter Phone Number"
+
+                        <Input
+                            id={'phoneNumber'} title={'Phone Number'}
+                            placeholder={'Enter your phone number here'}
+                            type={'number'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
                                 setPhone(target.value);
                             }}
-                            required
+                            required={true}
                         />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="Enter Email Address"
+
+                        <Input
+                            id={'email'} title={'Email'}
+                            placeholder={'Enter your email here'}
+                            type={'email'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
                                 setEmail(target.value);
                             }}
-                            required
+                            required={true}
                         />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="marriage-status">Marriage Status:</label>
-                        <select
-                            id="marriage-status"
+
+                        <Selection
+                            id={'marriageStatus'} title={'Marriage Status'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
                                 setMarriageStatus(target.value as MarriageTypeSelection);
                             }}
-                            required
+                            required={true}
                         >
                             <option value="">Select</option>
                             <option value="Single">Single</option>
                             <option value="Married">Married</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="days">Days:</label>
-                        <input
-                            type="number" id="days" min="1"
-                            placeholder="Enter Number of Days"
+                        </Selection>
+
+                        <Input
+                            id={'stayDuration'} title={'Stay Duration [ Day(s) ]'}
+                            placeholder={'Enter your stay duration'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
 
@@ -199,27 +266,30 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
                                 if (isNaN(numValue)) numValue = null;
                                 setDays(numValue);
                             }}
-                            required
+                            required={true}
                         />
                     </div>
-                </div>
-                <div className="button-group">
-                    <button
-                        type="button"
-                        className="btn bookRoom"
-                        onClick={calculateCost}
-                    >Calculate Cost</button>
-                    <button
-                        type={'submit'}
-                        className="btn bookRoom"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            requestBooking();
-                        }}
-                    >Book Room</button>
-                    <Btn className="btn bookRoom exit-btn" to='/'>Back</Btn>
-                </div>
-            </form>
+                    <FormBtnPair>
+                        <PrimaryBtn
+                            onClick={(e) => {
+                                e.preventDefault();
+                                requestBooking();
+                            }}
+                        >
+                            <span>Request Booking</span>
+                            <div className={'imageHolder ico'}>
+                                <img src={'/icons/svg/receipt.svg'} alt={'icon'} />
+                            </div>
+                        </PrimaryBtn>
+                        <SecBtn onClick={calculateCost}>
+                            <span>Calculate Cost</span>
+                            <div className={'imageHolder ico'}>
+                                <img src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
+                            </div>
+                        </SecBtn>
+                    </FormBtnPair>
+                </form>
+            </CenteredBody>
         </div>
-    );
+    )
 }
