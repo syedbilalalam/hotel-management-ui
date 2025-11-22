@@ -45,6 +45,24 @@ function retriveAppInfo(name: string): Map<number, unknown> | null {
     return null;
 }
 
+function getWallet() {
+    const walletData = localStorage.getItem('wallet');
+    if (walletData === null)
+        return null;
+
+    const wallet = parseInt(walletData);
+    if (isNaN(wallet)){
+        localStorage.removeItem('wallet');
+        return null;
+    }
+
+    return wallet;
+}
+
+function saveWallet(value: number) {
+    localStorage.setItem('wallet', value.toString());
+}
+
 function Main() {
     const [checkinSummaryProps, setCheckinSummaryProps] = useState<CheckInSummaryProps | null>(null);
     const [checkoutSummaryProps, setCheckoutSummaryProps] = useState<CheckoutSummaryProps | null>(null);
@@ -56,6 +74,7 @@ function Main() {
     const hotelRooms = useRef<RoomDb<HotelRoom>>(null);
     const bookedRooms = useRef<RoomDb<BookedRoom>>(null);
     const checkedInRooms = useRef<RoomDb<CheckedInRoom>>(null);
+    const wallet = useRef(0);
 
 
     useEffect(() => {
@@ -78,24 +97,24 @@ function Main() {
         const saved = {
             hotelrooms: retriveAppInfo('hotelrooms'),
             bookedrooms: retriveAppInfo('bookedrooms'),
-            checkedinrooms: retriveAppInfo('checkinrooms')
+            checkedinrooms: retriveAppInfo('checkinrooms'),
+            wallet: getWallet()
         }
 
         if (saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms as any;
         if (saved.bookedrooms !== null) hotelRooms.current = saved.bookedrooms as any;
         if (saved.checkedinrooms !== null) hotelRooms.current = saved.checkedinrooms as any;
-
+        if (saved.wallet !== null) wallet.current = saved.wallet;
 
         setInterval(() => {
-            saveAppInfo('hotelrooms', hotelRooms.current!)
-            saveAppInfo('bookedrooms', hotelRooms.current!)
-            saveAppInfo('checkinrooms', hotelRooms.current!)
+            saveAppInfo('hotelrooms', hotelRooms.current!);
+            saveAppInfo('bookedrooms', hotelRooms.current!);
+            saveAppInfo('checkinrooms', hotelRooms.current!);
+            saveWallet(wallet.current);
         }, 1000);
 
         setRenderApp(true);
     }, []);
-
-
 
     return (
         loginState ? (
@@ -108,7 +127,15 @@ function Main() {
                     <Route path="/available-rooms" element={<AvailableRooms
                         hotelRooms={hotelRooms.current!}
                     />} />
-                    <Route path="/book-room" element={<BookRoom bookedRooms={bookedRooms.current!} hotelRooms={hotelRooms.current!} />} />
+                    <Route
+                        path="/book-room" element={
+                            <BookRoom
+                                bookedRooms={bookedRooms.current!}
+                                hotelRooms={hotelRooms.current!}
+                                wallet={wallet}
+                            />
+                        }
+                    />
                     <Route path="/booked-rooms" element={<BookedRooms
                         bookedRooms={bookedRooms.current!}
                         hotelRooms={hotelRooms.current!}

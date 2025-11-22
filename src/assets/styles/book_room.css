@@ -13,7 +13,7 @@
     padding: 10px;
     font-size: 14px;
     border-radius: unset;
-    outline: none;
+    outline-color: var(--highlight);
 }
 
 .bookRoom .requiredFields {
@@ -33,4 +33,31 @@
 }
 .bookRoom .systemBtn .ico {
     height: 20px;
+}
+
+/* Mini banner css */
+.bookRoom .miniNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookRoom .miniNav .walletInfo {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid var(--dark-blue);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 15px;
+    color: var(--dark-blue)
+}
+
+.bookRoom .miniNav .walletInfo img {
+    height: 18px;
+}
+
+.bookRoom .miniNav .walletInfo .value {
+    font-weight: bold;
 }

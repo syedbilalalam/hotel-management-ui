@@ -5,7 +5,8 @@ import CenteredBody from '@src/pages/components/centered_body';
 import { FormBtnPair, PrimaryBtn, SecBtn } from '@src/pages/components/form_btns';
 import {
     useState, useRef, useEffect,
-    type FormEventHandler, type ReactNode
+    type FormEventHandler, type ReactNode,
+    type RefObject
 } from 'react';
 import {
     MARRIAGE_STATUS,
@@ -33,6 +34,7 @@ export function meta() {
 interface BookRoomProps {
     hotelRooms: RoomDb<HotelRoom>
     bookedRooms: RoomDb<BookedRoom>
+    wallet: RefObject<number>;
 }
 
 interface InputProps {
@@ -44,6 +46,7 @@ interface InputProps {
     onInput?: FormEventHandler<HTMLInputElement>;
     required?: boolean;
 }
+
 interface SelectionProps {
     id: string;
     title: string;
@@ -109,31 +112,48 @@ function Input({
     )
 }
 
-export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
+export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps) {
     const nav = useNavigate();
-
+    
     const [roomNumber, setRoomNumber] = useState<number | null>(null);
     const [guestName, setGuestName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [marriageStatus, setMarriageStatus] = useState<
-        MarriageTypeSelection | 'UNSPECIFIED'
+    MarriageTypeSelection | 'UNSPECIFIED'
     >('UNSPECIFIED');
     const [days, setDays] = useState<number | null>(null);
-
+    
     const formElem = useRef<HTMLFormElement>(null);
 
+    const calculateCost = () => {
+        if (!days || roomNumber === null) {
+            throw new Error('Please enter valid room no. with no of days you want to stay');
+        }
+        const hotelRoom = hotelRooms.get(roomNumber);
+        if (!hotelRoom) {
+            throw new Error('Please enter a valid room no.');
+        }
+        let roomValue = ROOM_PRICE.SINGLE;
+        const roomType = hotelRoom[HOTEL_ROOM.TYPE];
+        if (roomType === ROOM_TYPE.DOUBLE) roomValue = ROOM_PRICE.DOUBLE;
+
+        const finalCalc = roomValue * days;
+
+        return finalCalc;
+    }
+    
     const requestBooking = () => {
         formElem.current = formElem.current!;
-
+        
         // Validating fields
         if (!formElem.current.checkValidity()) {
             formElem.current.reportValidity();
             return;
         }
-
+        
         if (roomNumber === null || days === null || days === 0) return;
-
+        
         const hotelRoom = hotelRooms.get(roomNumber);
 
         const targetRoomData = bookedRooms.get(roomNumber);
@@ -153,6 +173,20 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
             return;
         }
 
+        // Calculating the cost
+        let cost = 0;
+        try {
+            cost = calculateCost();
+            if (cost > wallet.current) {
+                alert('Not enough balance in your wallet! Recharge it.');
+                return;
+            }
+        }
+        catch {
+            alert('Something went wrong!');
+            return;
+        }
+
         bookedRooms.set(roomNumber, [
             guestName,
             phone,
@@ -162,6 +196,9 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
             days
         ]);
 
+        // Updating wallet value
+        wallet.current -= cost;
+
         // Updating hotel room var
         hotelRoom[HOTEL_ROOM.STATUS] = ROOM_STATUS.BOOKED;
 
@@ -170,29 +207,29 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
         nav('/');
     };
 
-    const calculateCost = () => {
-        if (!days || roomNumber === null) {
-            alert('Please enter valid room no. with no of days you want to stay');
-            return;
+    const printCost = () => {
+        try {
+            const cost = calculateCost();
+            alert(`Total Cost: ${cost}$`);
         }
-        const hotelRoom = hotelRooms.get(roomNumber);
-        if (!hotelRoom) {
-            alert('Please enter a valid room no.');
-            return;
+        catch (e) {
+            const err = e as Error;
+            alert(err.message);
         }
-        let roomValue = ROOM_PRICE.SINGLE;
-        const roomType = hotelRoom[HOTEL_ROOM.TYPE];
-        if (roomType === ROOM_TYPE.DOUBLE) roomValue = ROOM_PRICE.DOUBLE;
-
-        const finalCalc = roomValue * days;
-
-        alert(`Total Cost: ${finalCalc}$`)
     }
+
     return (
         <div className={'bookRoom'}>
             <Navbar />
             <CenteredBody maxWidth={600}>
-                <PageTitle parentPath={'/'} text={'Book a Room'} />
+                <div className={'miniNav'}>
+                    <PageTitle parentPath={'/'} text={'Book a Room'} />
+                    <div className={'walletInfo'}>
+                        <span>Wallet: </span>
+                        <span className={'value'}>{wallet.current}</span>
+                        <img src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
+                    </div>
+                </div>
                 <form ref={formElem}>
 
                     <div className={'requiredFields'}>
@@ -281,7 +318,7 @@ export default function Page({ hotelRooms, bookedRooms }: BookRoomProps) {
                                 <img src={'/icons/svg/receipt.svg'} alt={'icon'} />
                             </div>
                         </PrimaryBtn>
-                        <SecBtn onClick={calculateCost}>
+                        <SecBtn onClick={printCost}>
                             <span>Calculate Cost</span>
                             <div className={'imageHolder ico'}>
                                 <img src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
