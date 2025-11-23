@@ -77,3 +77,12 @@ body {
   --green: #25B53B;
   --highlight: #008cff;
 }
+.systemBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+.systemBtn .ico {
+    height: 20px;
+}

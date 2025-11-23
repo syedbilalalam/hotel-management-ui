@@ -1,0 +1,28 @@
+/* Input Section */
+.inputHolder, .selectionHolder {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 10px 0;
+}
+.inputHolder label, .selectionHolder label{
+    font-size: 16px;
+}
+.inputHolder input, .selectionHolder select {
+    border: 2px solid var(--dark-blue);
+    padding: 10px;
+    font-size: 14px;
+    border-radius: unset;
+    outline-color: var(--highlight);
+}
+
+/* Form fields holder */
+.requiredFields {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px solid var(--dark-blue);
+    border-radius: 5px;
+    padding: 10px;
+}

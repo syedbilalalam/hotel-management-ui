@@ -3,9 +3,9 @@ import Navbar from '@src/pages/components/navbar';
 import PageTitle from '@src/pages/components/page_title';
 import CenteredBody from '@src/pages/components/centered_body';
 import { FormBtnPair, PrimaryBtn, SecBtn } from '@src/pages/components/form_btns';
+import { FormFieldsHolder, Input, Selection } from '@src/pages/components/form_elems';
 import {
-    useState, useRef, useEffect,
-    type FormEventHandler, type ReactNode,
+    useState, useRef,
     type RefObject
 } from 'react';
 import {
@@ -35,81 +35,6 @@ interface BookRoomProps {
     hotelRooms: RoomDb<HotelRoom>
     bookedRooms: RoomDb<BookedRoom>
     wallet: RefObject<number>;
-}
-
-interface InputProps {
-    id: string;
-    title: string;
-    placeholder: string;
-    type?: 'text' | 'number' | 'password' | 'email';
-    width?: number;
-    onInput?: FormEventHandler<HTMLInputElement>;
-    required?: boolean;
-}
-
-interface SelectionProps {
-    id: string;
-    title: string;
-    children: ReactNode;
-    width?: number;
-    onInput?: FormEventHandler<HTMLSelectElement>;
-    required?: boolean;
-}
-
-function Selection({
-    id, title,
-    required = false,
-    onInput,
-    children,
-    ...props
-}: SelectionProps) {
-
-    const [maxWidth, setMaxWidth] = useState('340px');
-
-    useEffect(() => {
-        if (props.width) setMaxWidth(`${props.width}px`);
-    });
-
-    return (
-        <div className={'selectionHolder'}>
-            <label htmlFor={id}>{title}</label>
-            <select
-                id={id} style={{ maxWidth }}
-                onInput={onInput}
-                required={required}
-            >
-                {children}
-            </select>
-        </div>
-    )
-}
-function Input({
-    id, title,
-    placeholder,
-    type = 'text',
-    required = false,
-    onInput,
-    ...props
-}: InputProps) {
-
-    const [maxWidth, setMaxWidth] = useState('340px');
-
-    useEffect(() => {
-        if (props.width) setMaxWidth(`${props.width}px`);
-    });
-
-    return (
-        <div className={'inputHolder'}>
-            <label htmlFor={id}>{title}</label>
-            <input
-                id={id} type={type}
-                placeholder={placeholder}
-                style={{ maxWidth }}
-                onInput={onInput}
-                required={required}
-            />
-        </div>
-    )
 }
 
 export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps) {
@@ -232,7 +157,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
                 </div>
                 <form ref={formElem}>
 
-                    <div className={'requiredFields'}>
+                    <FormFieldsHolder>
 
                         <Input
                             id={'roomNo'} title={'Room No'}
@@ -305,7 +230,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
                             }}
                             required={true}
                         />
-                    </div>
+                    </FormFieldsHolder>
                     <FormBtnPair>
                         <PrimaryBtn
                             onClick={(e) => {

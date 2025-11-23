@@ -57,7 +57,7 @@ function CardsHolder() {
             <Card
                 text={'Cancel Booking'}
                 iconUrl={'/icons/svg/bookmark_remove.svg'}
-                linksTo={'/'}
+                linksTo={'/cancel-booking'}
             />
             <Card
                 text={'Booked Rooms'}

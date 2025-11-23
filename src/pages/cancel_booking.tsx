@@ -1,12 +1,18 @@
-import { Btn } from '@src/assets/components/btn';
-import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HOTEL_ROOM, ROOM_STATUS, type BookedRoom, type HotelRoom } from '@src/assets/components/db';
+import Navbar from '@src/pages/components/navbar';
+import PageTitle from '@src/pages/components/page_title';
+import CenteredBody from '@src/pages/components/centered_body';
+import { FormBtnPair, PrimaryBtn, SecBtn } from '@src/pages/components/form_btns';
+import { FormFieldsHolder, Input } from '@src/pages/components/form_elems';
+import {
+    HOTEL_ROOM, ROOM_STATUS,
+    type BookedRoom, type HotelRoom
+} from '@src/assets/components/db';
 
 // Importing page styling
-// import '@src/assets/styles/cancel_booking.css';
-// import '@src/assets/styles/global.css';
+import '@src/assets/styles/cancel_booking.css';
 import type { RoomDb } from '@src/main';
+import { useRef, useState } from 'react';
 
 export function meta() {
     return [
@@ -20,9 +26,9 @@ interface CancelBookingProps {
     hotelRooms: RoomDb<HotelRoom>;
 }
 
-export default function Page({bookedRooms, hotelRooms}: CancelBookingProps) {
+export default function Page({hotelRooms, bookedRooms}: CancelBookingProps) {
     const nav = useNavigate();
-
+    
     const [roomNo, setRoomNo] = useState<number | null>(null);
 
     const formElem = useRef<HTMLFormElement>(null);
@@ -56,46 +62,45 @@ export default function Page({bookedRooms, hotelRooms}: CancelBookingProps) {
         alert('Booking sucessfully canceled');
         nav('/');
     }
-
     return (
-        <div className="container cancelBooking">
-            <div className="header">
-                <h1>Cancel Booking</h1>
-            </div>
-            <form id="cancelBookingForm" className="cancel-booking-form" ref={formElem}>
-                <div className="form-group">
-                    <label htmlFor="roomNumber">Enter Room Number to Cancel Booking:</label>
-                    <input
-                        type="number" placeholder="Enter Room Number"
-                        onInput={(e) => {
-                            const target = e.target as HTMLInputElement;
-                            const roomNo = parseInt(target.value);
-                            if (isNaN(roomNo)) setRoomNo(null);
-                            else setRoomNo(roomNo);
-                        }}
-                        required
-                    />
-                </div>
-                <div className="button-group">
-                    <button
-                        type="submit"
-                        className="btn"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            formElem.current = formElem.current!;
-                            if (!formElem.current.checkValidity()) {
-                                formElem.current.reportValidity();
-                                return;
-                            }
-                            cancelBooking();
-                        }}
-                    >Cancel Booking</button>
-                    <Btn
-                        className="btn exit-btn"
-                        to={'/'}
-                    >Back</Btn>
-                </div>
-            </form>
-        </div>
-    );
+        <>
+            <Navbar />
+            <CenteredBody maxWidth={700}>
+                <PageTitle parentPath={'/'} text={'Cancel Booking'} />
+                <form ref={formElem}>
+                    <FormFieldsHolder>
+                        <Input
+                            id={'roomNo'} title={'Room No'}
+                            placeholder={'Enter room no here'}
+                            onInput={(e)=> {
+                                const rn = parseInt((e.target as HTMLInputElement).value);
+                                if (isNaN(rn))
+                                    setRoomNo(null);
+                                else
+                                    setRoomNo(rn)
+                            }}
+                            type={'number'}
+                            required={true}
+                        />
+                    </FormFieldsHolder>
+                    <FormBtnPair>
+                        <PrimaryBtn onClick={cancelBooking}>
+                            <span>Cancel Booking</span>
+                            <div className={'imageHolder ico'}>
+                                <img src={'/icons/svg/event_busy.svg'} alt={'icon'} />
+                            </div>
+                        </PrimaryBtn>
+                        <SecBtn onClick={()=> {
+                            nav('/');
+                        }}>
+                            <span>Keep Booking</span>
+                            <div className={'imageHolder ico'}>
+                                <img src={'/icons/svg/grading.svg'} alt={'icon'} />
+                            </div>
+                        </SecBtn>
+                    </FormBtnPair>
+                </form>
+            </CenteredBody>
+        </>
+    )
 }
