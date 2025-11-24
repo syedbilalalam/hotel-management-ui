@@ -22,7 +22,7 @@
     border: 2px solid var(--dark-blue);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 28px;
 }
 
 .bookedRoomCard .infoContainer {
@@ -39,7 +39,7 @@
 .bookedRoomCard .infoContainer .left, .bookedRoomCard .infoContainer .right {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     font-size: 16px;
 }
 

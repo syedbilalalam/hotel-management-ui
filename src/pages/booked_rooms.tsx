@@ -57,7 +57,7 @@ function Card(props: BookedRoomCardProps) {
                     <p className={'info'}>Total Cost</p>
                 </div>
                 <div className={'right'}>
-                    <p className={'info'}>{props.roomNo}</p>
+                    <p className={'info'}>{props.roomType}</p>
                     <p className={'info'}>{props.guestName}</p>
                     <p className={'info'}>{props.phoneNo}</p>
                     <p className={'info'}>{props.email}</p>
