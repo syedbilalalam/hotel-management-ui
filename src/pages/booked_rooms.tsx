@@ -1,10 +1,14 @@
-import { Btn } from '@src/assets/components/btn';
-import { BOOKED_ROOM, type BookedRoom, ROOM_TYPE, HOTEL_ROOM, ROOM_PRICE, type HotelRoom } from '@src/assets/components/db';
 import { useEffect, useState } from 'react';
+import Navbar from '@src/pages/components/navbar';
+import PageTitle from '@src/pages/components/page_title';
+import {
+    BOOKED_ROOM, ROOM_TYPE,
+    HOTEL_ROOM, ROOM_PRICE,
+    type HotelRoom, type BookedRoom
+} from '@src/assets/components/db';
 
 // Importing page styling
-// import '@src/assets/styles/booked_rooms.css';
-// import '@src/assets/styles/global.css';
+import '@src/assets/styles/booked_rooms.css';
 import type { RoomDb } from '@src/main';
 
 type BookedRooms = {
@@ -29,15 +33,53 @@ interface BookedRoomsProps {
     hotelRooms: RoomDb<HotelRoom>;
 }
 
+interface BookedRoomCardProps {
+    roomNo: number;
+    roomType: 'Single' | 'Double';
+    guestName: string;
+    phoneNo: string | number;
+    email: string;
+    duration: number;
+    totalCost: number;
+}
 
-export default function Page({bookedRooms, hotelRooms}: BookedRoomsProps) {
+function Card(props: BookedRoomCardProps) {
+    return (
+        <div className={'bookedRoomCard'}>
+            <p className={'title'}>Room No: <span>{props.roomNo}</span></p>
+            <div className={'infoContainer'}>
+                <div className={'left'}>
+                    <p className={'info'}>Room Type</p>
+                    <p className={'info'}>Guest Name</p>
+                    <p className={'info'}>Phone Number</p>
+                    <p className={'info'}>Email</p>
+                    <p className={'info'}>Day(s) Booked</p>
+                    <p className={'info'}>Total Cost</p>
+                </div>
+                <div className={'right'}>
+                    <p className={'info'}>{props.roomNo}</p>
+                    <p className={'info'}>{props.guestName}</p>
+                    <p className={'info'}>{props.phoneNo}</p>
+                    <p className={'info'}>{props.email}</p>
+                    <p className={'info'}>{props.duration}</p>
+                    <p className={'info cost'}>
+                        <span>{props.totalCost}</span>
+                        <img src={'/icons/svg/monetization_card.svg'} alt={''} />
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default function Page(props: BookedRoomsProps) {
     const [rooms, setRooms] = useState<BookedRooms>([]);
-
+    
     useEffect(() => {
         const newRooms: BookedRooms = [];
-        for (const [roomNumber, value] of bookedRooms) {
+        for (const [roomNumber, value] of props.bookedRooms) {
 
-            const roomInfo = hotelRooms.get(roomNumber)!;
+            const roomInfo = props.hotelRooms.get(roomNumber)!;
 
 
             newRooms.push({
@@ -52,17 +94,14 @@ export default function Page({bookedRooms, hotelRooms}: BookedRoomsProps) {
         }
         setRooms(newRooms);
     }, []);
-
+    
     return (
-        <div className="container bookedRooms">
-            <div className="header">
-                <Btn
-                    className="btn exit-btn"
-                    to={'/'}
-                >Back</Btn>
-                <h1>Booked Rooms</h1>
+        <div className={'bookedRooms'}>
+            <Navbar />
+            <div className={'titleContainer'}>
+                <PageTitle parentPath={'/'} text={'Booked Rooms'} />
             </div>
-            <div id="aros" className="rooms-list">
+            <div className={'cardsContainer'}>
                 {
                     rooms.length ? (rooms.map(data => {
 
@@ -70,15 +109,16 @@ export default function Page({bookedRooms, hotelRooms}: BookedRoomsProps) {
                         const price = ROOM_PRICE[data.roomType === ROOM_TYPE.SINGLE ? 'SINGLE' : 'DOUBLE'] * data.duration;
 
                         return (
-                            <div className="room-card" key={data.roomNumber}>
-                                <h2>Room Number: {data.roomNumber}</h2>
-                                <p><strong>Room Type:</strong> {roomType}</p>
-                                <p><strong>Guest Name:</strong> {data.name}</p>
-                                <p><strong>Phone Number:</strong> {data.phone}</p>
-                                <p><strong>Email:</strong> {data.email}</p>
-                                <p><strong>Days Booked:</strong> {data.duration} day(s)</p>
-                                <p><strong>Total Cost:</strong>{price}$</p>
-                            </div>
+                            
+                            <Card
+                                roomNo={data.roomNumber}
+                                roomType={roomType}
+                                guestName={data.name}
+                                phoneNo={data.phone}
+                                email={data.email}
+                                duration={data.duration}
+                                totalCost={price}
+                            />
                         );
                     })) : (
                         <p>No rooms are currently booked.</p>

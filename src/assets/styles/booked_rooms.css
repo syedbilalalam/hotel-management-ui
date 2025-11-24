@@ -1,0 +1,59 @@
+.bookedRooms .titleContainer {
+    padding: 20px 0 0 20px;
+}
+.bookedRooms .cardsContainer {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    padding-top: 40px;
+    width: 100%;
+}
+
+/* Booked room card styling */
+.bookedRoomCard {
+    background-color: var(--light-blue);
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bookedRoomCard .infoContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.bookedRoomCard .title {
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.bookedRoomCard .infoContainer .left, .bookedRoomCard .infoContainer .right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.bookedRoomCard .infoContainer .left {
+    color: var(--dark-blue);
+}
+.bookedRoomCard .infoContainer .right {
+    color: #000;
+}
+.bookedRoomCard .infoContainer .right .cost {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.bookedRoomCard .infoContainer .right .cost img {
+    height: 18px;
+}
