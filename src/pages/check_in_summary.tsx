@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Btn } from '@src/assets/components/btn';
+import Navbar from '@src/pages/components/navbar';
+import PageTitle from '@src/pages/components/page_title';
+import { PrimaryBtn } from '@src/pages/components/form_btns';
+import { SummaryCardsContainer, SummaryCard } from '@src/pages/components/summary_card';
 import type { RoomDb } from '@src/main';
-import { BOOKED_ROOM, CHECKED_IN_ROOM, type BookedRoom, type CheckedInRoom } from '@src/assets/components/db';
-// Importing page styling
-// import '@src/assets/styles/global.css';
-// import '@src/assets/styles/check_in.css';
-// import '@src/assets/styles/check_in_summary.css';
+import {
+    BOOKED_ROOM, CHECKED_IN_ROOM,
+    type BookedRoom, type CheckedInRoom
+} from '@src/assets/components/db';
+
+// Importing styles
+import '@src/assets/styles/check_in_summary.css';
 
 export interface CheckInSummaryProps {
     roomNo: number;
 }
 
-interface CheckInRootProps {
+interface CheckInRoomProps {
     props: CheckInSummaryProps | null;
     checkedInRooms: RoomDb<CheckedInRoom>
     bookedRooms: RoomDb<BookedRoom>
@@ -22,10 +27,10 @@ interface CheckInData {
     name: string;
     duration: number;
     cost: number;
-    checkinDate: string;
+    date: string;
 }
 
-export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRootProps) {
+export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRoomProps) {
     const nav = useNavigate();
 
     const [checkinData, setCheckInData] = useState<CheckInData | null>(null);
@@ -33,14 +38,14 @@ export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRoot
     useEffect(() => {
         if (props === null) {
             alert('This was unexpected');
-            nav('/');
+            nav('/', { replace: true });
             return;
         }
         const bookedRoom = bookedRooms.get(props.roomNo)!;
         const room = checkedInRooms.get(props.roomNo);
         if (props === null || typeof room === 'undefined') {
             alert('This was unexpected');
-            nav('/');
+            nav('/', { replace: true });
             return;
         }
 
@@ -48,40 +53,38 @@ export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRoot
             name: bookedRoom[BOOKED_ROOM.NAME],
             duration: bookedRoom[BOOKED_ROOM.DURATION],
             cost: room[CHECKED_IN_ROOM.COST],
-            checkinDate: room[CHECKED_IN_ROOM.DATE]
+            date: room[CHECKED_IN_ROOM.DATE]
         });
     }, []);
 
     return (
-        <div className="container checkin">
-            <div className="header">
-                <h1>Check-In Summary</h1>
+        <div className={'checkInSummary summaryPage'}>
+            <Navbar />
+            <div className={'titleContainer'}>
+                <PageTitle text={'Check-in Summary'} parentPath={'/'} />
             </div>
-            <div className="checkin-summary">
-                <div id="sc" className="summary-card">
-                    {
-                        checkinData !== null && props !== null ? (
-                            <>
-                                <h2>Guest Name: {checkinData.name}</h2>
-                                <p><strong>Room Number:</strong> {props.roomNo}</p>
-                                <p><strong>Stay Duration:</strong> {checkinData.duration} day(s)</p>
-                                <p><strong>Total Cost:</strong> {checkinData.cost}$</p>
-                                <p><strong>Check-In Date:</strong> {checkinData.checkinDate}</p>
-                                <p><strong>Status:</strong> Checked In</p>
-                            </>
-                        ) : (
+            {checkinData !== null && props !== null ? (
+                <>
+                    <SummaryCardsContainer>
+                        <SummaryCard
+                            roomNo={props.roomNo}
+                            guestName={checkinData.name}
+                            duration={checkinData.duration}
+                            totalCost={checkinData.cost}
+                            checkinDate={checkinData.date}
+                            status={'Checked in'}
+                        />
 
-                            <p><strong>Loading....</strong></p>
-                        )
-                    }
-                </div>
-            </div>
-            <div className="button-container">
-                <Btn
-                    className="confirm-btn"
-                    to={'/'}
-                >Continue</Btn>
-            </div>
+                        <PrimaryBtn
+                            onClick={() => {
+                                nav('/');
+                            }}
+                        >Continue</PrimaryBtn>
+                    </SummaryCardsContainer>
+                </>
+            ): (
+                <p><strong>Loading....</strong></p>
+            )}
         </div>
     );
 }

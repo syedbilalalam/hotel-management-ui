@@ -35,7 +35,7 @@ interface CheckoutProps {
 export default function Page(props: CheckoutProps) {
     const nav = useNavigate();
 
-    const [checkinDate, setCheckInDate] = useState('');
+    const [checkoutDate, setCheckoutDate] = useState('');
     const [roomNo, setRoomNo] = useState<number | null>(null);
 
     const formElem = useRef<HTMLFormElement>(null);
@@ -43,6 +43,10 @@ export default function Page(props: CheckoutProps) {
     const requestCheckout = () => {
         if (roomNo === null) {
             alert('Enter room no ');
+            return;
+        }
+        else if (!checkoutDate.length) {
+            alert('Please enter date also!');
             return;
         }
 
@@ -72,7 +76,7 @@ export default function Page(props: CheckoutProps) {
 
 
         // Navigating to the summary
-        nav('/check-out/summary');
+        nav('/checkout/summary');
     }
 
     return (
@@ -96,11 +100,11 @@ export default function Page(props: CheckoutProps) {
                         />
                         <Input
                             id={'checkoutDate'} title={'Checkout Date'}
-                            placeholder={'Select yoru checkin date'}
+                            placeholder={'Select your checkin date'}
                             type={'date'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
-                                setCheckInDate(target.value);
+                                setCheckoutDate(target.value);
                             }}
                             required={true}
                         />

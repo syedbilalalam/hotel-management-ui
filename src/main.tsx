@@ -167,7 +167,7 @@ function Main() {
                         setSummaryProps={setCheckoutSummaryProps} bookedRooms={bookedRooms.current!}
                         hotelRooms={hotelRooms.current!} checkedInRooms={checkedInRooms.current!}
                     />} />
-                    <Route path="/check-out/summary" element={<CheckOutSummary props={checkoutSummaryProps} />} />
+                    <Route path="/checkout/summary" element={<CheckOutSummary props={checkoutSummaryProps} />} />
                 </Routes>
             </BrowserRouter>
         ) : (

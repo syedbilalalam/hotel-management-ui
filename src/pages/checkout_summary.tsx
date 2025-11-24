@@ -1,4 +1,9 @@
-import { Btn } from '@src/assets/components/btn';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '@src/pages/components/navbar';
+import PageTitle from '@src/pages/components/page_title';
+import { PrimaryBtn } from '@src/pages/components/form_btns';
+import { SummaryCardsContainer, SummaryCard } from '@src/pages/components/summary_card';
 
 // Importing styles
 // import '@src/assets/styles/global.css';
@@ -12,37 +17,41 @@ export interface CheckoutSummaryProps {
 }
 
 export default function Page({ props }: { props: CheckoutSummaryProps | null; }) {
+    const nav = useNavigate();
+
+    useEffect(() => {
+        if (props === null)
+            nav('/', { replace: true });
+    });
+    
     return (
-        <div className="container checkOutSummary">
-            <div className="header">
-                <h1>Check-Out Summary</h1>
+        <div className={'checkOutSummary summaryPage'}>
+            <Navbar />
+            <div className={'titleContainer'}>
+                <PageTitle text={'Checkout Summary'} parentPath={'/'} />
             </div>
-            <div className="checkin-summary">
-                <div id="sc" className="summary-card">
-                    {
-                        props !== null ? (
-                            <>
-                                <h2>Guest Name: {props.name}</h2>
-                                <p><strong>Room Number:</strong> {props.roomNo}</p>
-                                <p><strong>Stay Duration:</strong> {props.duration} day(s)</p>
-                                <p><strong>Total Cost:</strong> {props.cost}$</p>
-                                <p><strong>Check-In Date:</strong> {props.checkinDate}</p>
-                                <p><strong>Status:</strong> Checked Out</p>
-                            </>
-                        ) : (
+            {props !== null ? (
+                <>
+                    <SummaryCardsContainer>
+                        <SummaryCard
+                            roomNo={props.roomNo}
+                            guestName={props.name}
+                            duration={props.duration}
+                            totalCost={props.cost}
+                            checkinDate={props.checkinDate}
+                            status={'Checked out'}
+                        />
 
-                            <p><strong>Loading....</strong></p>
-                        )
-                    }
-
-                </div>
-            </div>
-            <div className="button-container">
-                <Btn
-                    className="confirm-btn"
-                    to={'/'}
-                >Continue</Btn>
-            </div>
+                        <PrimaryBtn
+                            onClick={() => {
+                                nav('/');
+                            }}
+                        >Continue</PrimaryBtn>
+                    </SummaryCardsContainer>
+                </>
+            ): (
+                <p><strong>Loading....</strong></p>
+            )}
         </div>
-    )
+    );
 }

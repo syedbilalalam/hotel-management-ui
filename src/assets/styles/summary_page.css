@@ -1,0 +1,61 @@
+
+.summaryCardsContainer {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    padding-top: 40px;
+    width: 100%;
+}
+.summaryCardsContainer .btn {
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Summary card styling */
+.summaryCard {
+    background-color: var(--light-blue);
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.summaryCard .infoContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.summaryCard .title {
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.summaryCard .infoContainer .left, .summaryCard .infoContainer .right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+}
+
+.summaryCard .infoContainer .left {
+    color: var(--dark-blue);
+}
+.summaryCard .infoContainer .right {
+    color: #000;
+}
+.summaryCard .infoContainer .right .cost {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.summaryCard .infoContainer .right .cost img {
+    height: 18px;
+}

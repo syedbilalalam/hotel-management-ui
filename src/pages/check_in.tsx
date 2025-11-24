@@ -38,6 +38,10 @@ export default function Page(props: CheckinProps) {
             alert('Please enter a room number');
             return;
         }
+        else if (!checkinDate.length) {
+            alert('Please enter date also!');
+            return;
+        }
 
         const room = props.checkedInRooms.get(roomNo);
         if (typeof room !== 'undefined') {
@@ -88,7 +92,7 @@ export default function Page(props: CheckinProps) {
                         />
                         <Input
                             id={'checkInDate'} title={'Check-in Date'}
-                            placeholder={'Select yoru checkin date'}
+                            placeholder={'Select your checkin date'}
                             type={'date'}
                             onInput={(e) => {
                                 const target = e.target as HTMLInputElement;
