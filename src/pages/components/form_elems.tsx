@@ -13,7 +13,11 @@ interface InputProps {
     id: string;
     title: string;
     placeholder: string;
-    type?: 'text' | 'number' | 'password' | 'email';
+    type?: 'text'
+        | 'number'
+        | 'password'
+        | 'email'
+        | 'date';
     width?: number;
     onInput?: FormEventHandler<HTMLInputElement>;
     required?: boolean;

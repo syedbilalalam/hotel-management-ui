@@ -67,12 +67,12 @@ function CardsHolder() {
             <Card
                 text={'Check In'}
                 iconUrl={'/icons/svg/receipt_long.svg'}
-                linksTo={'/'}
+                linksTo={'/check-in'}
             />
             <Card
                 text={'Checkout'}
                 iconUrl={'/icons/svg/point_of_sale.svg'}
-                linksTo={'/'}
+                linksTo={'/checkout'}
             />
         </div>
     )

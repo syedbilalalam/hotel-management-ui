@@ -8,7 +8,7 @@ import BookRoom from '@src/pages/book_room';
 import BookedRooms from '@src/pages/booked_rooms';
 import CancelBooking from '@src/pages/cancel_booking';
 import CheckIn from '@src/pages/check_in';
-import CheckOut from '@src/pages/check_out';
+import CheckOut from '@src/pages/checkout';
 import CheckInSummary, { type CheckInSummaryProps } from '@src/pages/check_in_summary';
 import CheckOutSummary, { type CheckoutSummaryProps } from '@src/pages/checkout_summary';
 import Login from '@src/pages/login';
@@ -155,7 +155,7 @@ function Main() {
                         checkedInRooms={checkedInRooms.current!}
                         bookedRooms={bookedRooms.current!}
                     />} />
-                    <Route path="/check-out" element={<CheckOut
+                    <Route path="/checkout" element={<CheckOut
                         setSummaryProps={setCheckoutSummaryProps} bookedRooms={bookedRooms.current!}
                         hotelRooms={hotelRooms.current!} checkedInRooms={checkedInRooms.current!}
                     />} />
