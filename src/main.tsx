@@ -74,13 +74,16 @@ function Main() {
     const hotelRooms = useRef<RoomDb<HotelRoom>>(null);
     const bookedRooms = useRef<RoomDb<BookedRoom>>(null);
     const checkedInRooms = useRef<RoomDb<CheckedInRoom>>(null);
+    const intervalHandler = useRef<number>(null);
     const wallet = useRef(0);
 
 
     useEffect(() => {
         hotelRooms.current = new Map<RoomNumber, HotelRoom>();
+        bookedRooms.current = new Map<RoomNumber, BookedRoom>();
+        checkedInRooms.current = new Map<RoomNumber, CheckedInRoom>();
 
-
+        // Initializing hotel rooms randomly
         AVAILABLE_ROOMS.forEach((roomNo) => {
             const bytesArr = new Uint8Array(1);
             crypto.getRandomValues(bytesArr);
@@ -89,11 +92,7 @@ function Main() {
             hotelRooms.current!.set(roomNo, [roomType, ROOM_STATUS.AVAILABLE]);
         });
 
-        bookedRooms.current = new Map<RoomNumber, BookedRoom>();
-
-        checkedInRooms.current = new Map<RoomNumber, CheckedInRoom>();
-
-
+        // Retriving data from local storage
         const saved = {
             hotelrooms: retriveAppInfo('hotelrooms'),
             bookedrooms: retriveAppInfo('bookedrooms'),
@@ -102,19 +101,28 @@ function Main() {
         }
 
         if (saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms as any;
-        if (saved.bookedrooms !== null) hotelRooms.current = saved.bookedrooms as any;
-        if (saved.checkedinrooms !== null) hotelRooms.current = saved.checkedinrooms as any;
+        if (saved.bookedrooms !== null) bookedRooms.current = saved.bookedrooms as any;
+        if (saved.checkedinrooms !== null) checkedInRooms.current = saved.checkedinrooms as any;
         if (saved.wallet !== null) wallet.current = saved.wallet;
-
-        setInterval(() => {
-            saveAppInfo('hotelrooms', hotelRooms.current!);
-            saveAppInfo('bookedrooms', hotelRooms.current!);
-            saveAppInfo('checkinrooms', hotelRooms.current!);
-            saveWallet(wallet.current);
-        }, 1000);
 
         setRenderApp(true);
     }, []);
+    
+    useEffect(() => {
+        if (!renderApp) return;
+
+        // Clearing previous intervals to avoid unwanted looping
+        if (intervalHandler.current !== null)
+            clearInterval(intervalHandler.current);
+        
+        intervalHandler.current = setInterval(() => {
+            saveAppInfo('hotelrooms', hotelRooms.current!);
+            saveAppInfo('bookedrooms', bookedRooms.current!);
+            saveAppInfo('checkinrooms', checkedInRooms.current!);
+            saveWallet(wallet.current);
+        }, 1000);
+
+    }, [renderApp]);
 
     return (
         loginState ? (
