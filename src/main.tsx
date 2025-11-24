@@ -75,7 +75,7 @@ function Main() {
     const bookedRooms = useRef<RoomDb<BookedRoom>>(null);
     const checkedInRooms = useRef<RoomDb<CheckedInRoom>>(null);
     const intervalHandler = useRef<number>(null);
-    const wallet = useRef(0);
+    const wallet = useRef(5000);
 
 
     useEffect(() => {
