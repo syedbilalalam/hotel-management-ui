@@ -3,10 +3,12 @@ import "@src/assets/styles/login.css"; // import CSS file
 
 interface LoginPageProps {
     setLoginState: (val: boolean) => void;
+    userEmail: string;
+    userPassword: string;
 }
 
 
-export default function LoginPage({ setLoginState }: LoginPageProps) {
+export default function LoginPage({ setLoginState, userEmail, userPassword }: LoginPageProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,7 +19,7 @@ export default function LoginPage({ setLoginState }: LoginPageProps) {
                 console.log("Email:", email);
                 console.log("Password:", password);
 
-                if (email === 'testuser@edu.pk' && password === 'pakistan123') {
+                if (email === userEmail && password === userPassword) {
                     setLoginState(true);
                 }
                 else {

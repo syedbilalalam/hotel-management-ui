@@ -6,6 +6,10 @@ import type { ReactNode } from 'react';
 // Importing stylessheet
 import '@src/assets/styles/account.css';
 
+interface AccountPageProps {
+    userName: string;
+    wallet: number;
+}
 
 interface OptionContainerProps {
     iconPath: string;
@@ -43,7 +47,7 @@ function Option(props: OptionProps) {
     )
 }
 
-export default function Page() {
+export default function Page({ wallet, userName }: AccountPageProps) {
     return (
         <div className={'accountPage'}>
             <Navbar />
@@ -54,8 +58,8 @@ export default function Page() {
                         <img src={'icons/svg/person.svg'} alt={'icon'} />
                     </div>
                     <div className={'textContainer'}>
-                        <p className={'welcome'}>Welcome</p>
-                        <p className={'name'}>Test User Full Name</p>
+                        <p className={'welcome'}>Welcome,</p>
+                        <p className={'name'}>{userName}</p>
                     </div>
                 </div>
 
@@ -66,7 +70,7 @@ export default function Page() {
                             iconAlt={'Icon'}
                         >
                             <span>Wallet:</span>
-                            <span style={{fontWeight: 'bold'}}>150</span>
+                            <span style={{fontWeight: 'bold'}}>{wallet}</span>
                             <img className={'ico'} src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
                         </Option>
                     </div>

@@ -42,3 +42,27 @@
 .accountPage .options .rows .accountOption {
     flex-grow: 1;
 }
+.accountPage .centeredBody .title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark-blue);
+    margin: 40px 0 20px 0;
+}
+.accountPage .centeredBody .title .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.accountPage .centeredBody .title .textContainer .welcome {
+    font-size: 16px;
+}
+.accountPage .centeredBody .title .textContainer  .name {
+    font-size: 20px;
+}
+.accountPage .centeredBody .title .iconContainer {
+    border: 2px solid var(--dark-blue);
+    border-radius: 18px;
+    height: 74px;
+    padding: 8px;
+}

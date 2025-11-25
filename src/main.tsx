@@ -70,6 +70,11 @@ function Main() {
     const [renderApp, setRenderApp] = useState(false);
     const [loginState, setLoginState] = useState(false);
 
+    // User info
+    const userName = 'Test User';
+    const userEmail = 'testuser@edu.pk';
+    const userPassword = 'pakistan123';
+
 
 
     const hotelRooms = useRef<RoomDb<HotelRoom>>(null);
@@ -127,14 +132,14 @@ function Main() {
 
     return (
         loginState ? (
-            <Login setLoginState={setLoginState} />
+            <Login {...{setLoginState, userEmail, userPassword}} />
         ) : renderApp ? (
 
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home setLoginState={setLoginState} />} />
                     <Route path="/account" element={
-                        <Account />
+                        <Account wallet={wallet.current} userName={userName} />
                     } />
                     <Route path="/available-rooms" element={<AvailableRooms
                         hotelRooms={hotelRooms.current!}
