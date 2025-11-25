@@ -77,7 +77,7 @@ function Main() {
     const [checkoutSummaryProps, setCheckoutSummaryProps] = useState<CheckoutSummaryProps | null>(null);
     const [renderApp, setRenderApp] = useState(false);
     const [loginState, setLoginState] = useState(false);
-    const [walletValue, setWalletValue] = useState(5000);
+    const [walletValue, setWalletValue] = useState(100);
     // User info
     const userName = 'Test User';
     const userEmail = 'testuser@edu.pk';
@@ -141,7 +141,7 @@ function Main() {
     }, [renderApp]);
 
     return (
-        loginState ? (
+        !loginState ? (
             <Login {...{setLoginState, userEmail, userPassword}} />
         ) : renderApp ? (
 
