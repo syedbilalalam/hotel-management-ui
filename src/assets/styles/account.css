@@ -1,0 +1,44 @@
+/* Account Option Component */
+.accountOption .btn {
+    width: 100%;
+}
+.accountOption .container {
+    border: 2px solid var(--dark-blue);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--dark-blue);
+    gap: 8px;
+    border-radius: 14px;
+    padding: 40px;
+}
+.accountOption .container {
+    font-size: 18px;
+}
+.accountOption .container .tile.ico {
+    height: 80px;
+}
+
+/* Account Page css */
+.accountPage .centeredBody .options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.accountPage .options .rows {
+    display: flex;
+    gap: 20px;
+}
+.accountPage .options .rows.first .accountOption .name{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.accountPage .options .rows.first .accountOption .name .ico {
+    height: 20px;
+}
+.accountPage .options .rows .accountOption {
+    flex-grow: 1;
+}

@@ -22,7 +22,7 @@ export default function Component() {
                             <img src={'/icons/svg/logout.svg'} alt={'icon'} />
                         </div>
                     </Btn>
-                    <Btn to={'/'} className={'account btn'}>
+                    <Btn to={'/account'} className={'account btn'}>
                         <div className={'ico imageHolder'}>
                             <img src={'/icons/svg/person.svg'} alt={'icon'} />
                         </div>

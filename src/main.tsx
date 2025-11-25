@@ -12,6 +12,7 @@ import CheckOut from '@src/pages/checkout';
 import CheckInSummary, { type CheckInSummaryProps } from '@src/pages/check_in_summary';
 import CheckOutSummary, { type CheckoutSummaryProps } from '@src/pages/checkout_summary';
 import Login from '@src/pages/login';
+import Account from '@src/pages/account';
 import {
     AVAILABLE_ROOMS,
     ROOM_STATUS,
@@ -51,7 +52,7 @@ function getWallet() {
         return null;
 
     const wallet = parseInt(walletData);
-    if (isNaN(wallet)){
+    if (isNaN(wallet)) {
         localStorage.removeItem('wallet');
         return null;
     }
@@ -107,14 +108,14 @@ function Main() {
 
         setRenderApp(true);
     }, []);
-    
+
     useEffect(() => {
         if (!renderApp) return;
 
         // Clearing previous intervals to avoid unwanted looping
         if (intervalHandler.current !== null)
             clearInterval(intervalHandler.current);
-        
+
         intervalHandler.current = setInterval(() => {
             saveAppInfo('hotelrooms', hotelRooms.current!);
             saveAppInfo('bookedrooms', bookedRooms.current!);
@@ -132,6 +133,9 @@ function Main() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home setLoginState={setLoginState} />} />
+                    <Route path="/account" element={
+                        <Account />
+                    } />
                     <Route path="/available-rooms" element={<AvailableRooms
                         hotelRooms={hotelRooms.current!}
                     />} />
