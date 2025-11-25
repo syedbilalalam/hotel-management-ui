@@ -1,20 +1,9 @@
 import { Btn } from '@src/assets/components/btn';
 import Navbar from '@src/pages/components/navbar';
 import CenteredBody from '@src/pages/components/centered_body';
-import '@src/assets/styles/home.css';
+
 // Page styleing
-// import '@src/assets/styles/home.css';
-
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
-interface HomePageProps {
-    setLoginState: (val: boolean) => void;
-}
+import '@src/assets/styles/home.css';
 
 function Title() {
     return (
@@ -79,7 +68,7 @@ function CardsHolder() {
     )
 }
 
-export default function Page(homePageProps: HomePageProps) {
+export default function Page() {
 
     return (
         <>

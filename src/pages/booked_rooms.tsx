@@ -21,13 +21,6 @@ type BookedRooms = {
     roomNumber: number;
 }[];
 
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
 interface BookedRoomsProps {
     bookedRooms: RoomDb<BookedRoom>;
     hotelRooms: RoomDb<HotelRoom>;
@@ -93,7 +86,7 @@ export default function Page(props: BookedRoomsProps) {
             });
         }
         setRooms(newRooms);
-    }, []);
+    }, [props.hotelRooms, props.bookedRooms]);
     
     return (
         <div className={'bookedRooms'}>

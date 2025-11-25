@@ -14,13 +14,6 @@ import '@src/assets/styles/cancel_booking.css';
 import type { RoomDb } from '@src/main';
 import { useRef, useState } from 'react';
 
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
 interface CancelBookingProps {
     bookedRooms: RoomDb<BookedRoom>;
     hotelRooms: RoomDb<HotelRoom>;

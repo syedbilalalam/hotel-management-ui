@@ -38,13 +38,13 @@ function saveAppInfo(name: string, map: Map<number, unknown>) {
     localStorage.setItem(name, JSON.stringify(obj));
 }
 
-function retriveAppInfo(name: string): Map<number, unknown> | null {
+function retriveAppInfo<T>(name: string): Map<number, T> | null {
     const appData = localStorage.getItem(name);
 
     if (appData !== null) {
 
-        const obj = JSON.parse(appData) as [number[], unknown[]];
-        const h = new Map<number, unknown>();
+        const obj = JSON.parse(appData) as [number[], T[]];
+        const h = new Map<number, T>();
         obj[0].forEach((key, index) => {
             h.set(key, obj[1][index]);
         })
@@ -72,7 +72,7 @@ function saveWallet(value: number) {
     localStorage.setItem('wallet', value.toString());
 }
 
-function Main() {
+export function Main() {
     const [checkinSummaryProps, setCheckinSummaryProps] = useState<CheckInSummaryProps | null>(null);
     const [checkoutSummaryProps, setCheckoutSummaryProps] = useState<CheckoutSummaryProps | null>(null);
     const [renderApp, setRenderApp] = useState(false);
@@ -110,15 +110,15 @@ function Main() {
 
         // Retriving data from local storage
         const saved = {
-            hotelrooms: retriveAppInfo('hotelrooms'),
-            bookedrooms: retriveAppInfo('bookedrooms'),
-            checkedinrooms: retriveAppInfo('checkinrooms'),
+            hotelrooms: retriveAppInfo<HotelRoom>('hotelrooms'),
+            bookedrooms: retriveAppInfo<BookedRoom>('bookedrooms'),
+            checkedinrooms: retriveAppInfo<CheckedInRoom>('checkinrooms'),
             wallet: getWallet()
         }
 
-        if (saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms as any;
-        if (saved.bookedrooms !== null) bookedRooms.current = saved.bookedrooms as any;
-        if (saved.checkedinrooms !== null) checkedInRooms.current = saved.checkedinrooms as any;
+        if (saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms;
+        if (saved.bookedrooms !== null) bookedRooms.current = saved.bookedrooms;
+        if (saved.checkedinrooms !== null) checkedInRooms.current = saved.checkedinrooms;
         if (saved.wallet !== null) setWalletValue(saved.wallet);
 
         setRenderApp(true);
@@ -138,7 +138,7 @@ function Main() {
             saveWallet(wallet.value);
         }, 1000);
 
-    }, [renderApp]);
+    }, [renderApp, wallet.value]);
 
     return (
         !loginState ? (
@@ -147,7 +147,7 @@ function Main() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home setLoginState={setLoginState} />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/account" element={
                         <Account wallet={wallet} userName={userName} />
                     } />

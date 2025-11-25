@@ -55,7 +55,7 @@ export default function Page({ props, checkedInRooms, bookedRooms }: CheckInRoom
             cost: room[CHECKED_IN_ROOM.COST],
             date: room[CHECKED_IN_ROOM.DATE]
         });
-    }, []);
+    }, [bookedRooms, checkedInRooms, nav, props]);
 
     return (
         <div className={'checkInSummary summaryPage'}>

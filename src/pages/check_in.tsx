@@ -11,13 +11,6 @@ import { BOOKED_ROOM, ROOM_PRICE, HOTEL_ROOM, ROOM_TYPE, type CheckedInRoom, typ
 // Importing page styling
 import '@src/assets/styles/check_in.css';
 
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
 interface CheckinProps {
     setSummaryProps: (val: CheckInSummaryProps) => void;
     checkedInRooms: RoomDb<CheckedInRoom>;

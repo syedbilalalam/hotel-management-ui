@@ -23,7 +23,7 @@ export default function CenteredBody({
     useEffect(()=> {
         if (props.minWidth) setMinWidth(`${props.minWidth}px`);
         if (props.style) setStyles(props.style);
-    }, []);
+    }, [props.minWidth, props.style]);
     
     return (
         <div className={'centeredBody'} style={{maxWidth: maxWidth, minWidth, ...styles}}>

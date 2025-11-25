@@ -17,13 +17,6 @@ import {
 // Importing page styling
 import '@src/assets/styles/checkout.css';
 
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
 interface CheckoutProps {
     setSummaryProps: (newVal: CheckoutSummaryProps) => void;
     checkedInRooms: RoomDb<CheckedInRoom>;

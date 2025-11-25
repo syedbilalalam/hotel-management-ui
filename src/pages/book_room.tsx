@@ -21,13 +21,6 @@ import '@src/assets/styles/book_room.css';
 
 type MarriageTypeSelection = 'Single' | 'Married';
 
-export function meta() {
-    return [
-        { title: "Castel Of Programmers" },
-        { name: "description", content: "Hotel Management App" },
-    ];
-}
-
 interface BookRoomProps {
     hotelRooms: RoomDb<HotelRoom>
     bookedRooms: RoomDb<BookedRoom>

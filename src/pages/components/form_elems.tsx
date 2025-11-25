@@ -44,7 +44,7 @@ export function Selection({
 
     useEffect(() => {
         if (props.width) setMaxWidth(`${props.width}px`);
-    });
+    }, [props.width]);
 
     return (
         <div className={'selectionHolder'}>
@@ -72,7 +72,7 @@ export function Input({
 
     useEffect(() => {
         if (props.width) setMaxWidth(`${props.width}px`);
-    });
+    }, [props.width]);
 
     return (
         <div className={'inputHolder'}>
