@@ -7,7 +7,7 @@ export default function Component() {
             <nav>
                 <div className={'title'}>
                     <div className={'imageHolder'}>
-                        <img src={'/icons/rasterized/app.png'} />
+                        <img src={'/icons/rasterized/app_logo.png'} />
                     </div>
                     <div className={'texts'}>
                         <p>THE CASTLE</p>

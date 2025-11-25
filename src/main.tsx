@@ -121,9 +121,6 @@ export function Main() {
         if (saved.checkedinrooms !== null) checkedInRooms.current = saved.checkedinrooms;
         if (saved.wallet !== null) setWalletValue(saved.wallet);
 
-        // Setting app title
-        document.title = 'Hotel Management System';
-        
         setRenderApp(true);
     }, []);
 
