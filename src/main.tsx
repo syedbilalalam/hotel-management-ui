@@ -9,6 +9,7 @@ import BookedRooms from '@src/pages/booked_rooms';
 import CancelBooking from '@src/pages/cancel_booking';
 import CheckIn from '@src/pages/check_in';
 import CheckOut from '@src/pages/checkout';
+import AddBalance from '@src/pages/add_balance';
 import CheckInSummary, { type CheckInSummaryProps } from '@src/pages/check_in_summary';
 import CheckOutSummary, { type CheckoutSummaryProps } from '@src/pages/checkout_summary';
 import Login from '@src/pages/login';
@@ -22,6 +23,13 @@ import {
     type RoomNumber
 } from '@src/assets/components/db';
 
+// Importing global css
+import '@src/assets/styles/global.css';
+
+export interface Wallet {
+    value: number;
+    set: (val: number) => void;
+}
 
 export type RoomDb<T> = Map<RoomNumber, T>;
 
@@ -69,20 +77,22 @@ function Main() {
     const [checkoutSummaryProps, setCheckoutSummaryProps] = useState<CheckoutSummaryProps | null>(null);
     const [renderApp, setRenderApp] = useState(false);
     const [loginState, setLoginState] = useState(false);
-
+    const [walletValue, setWalletValue] = useState(5000);
     // User info
     const userName = 'Test User';
     const userEmail = 'testuser@edu.pk';
     const userPassword = 'pakistan123';
 
-
-
     const hotelRooms = useRef<RoomDb<HotelRoom>>(null);
     const bookedRooms = useRef<RoomDb<BookedRoom>>(null);
     const checkedInRooms = useRef<RoomDb<CheckedInRoom>>(null);
     const intervalHandler = useRef<number>(null);
-    const wallet = useRef(5000);
 
+    // normal consts
+    const wallet = {
+        value: walletValue,
+        set: setWalletValue
+    }
 
     useEffect(() => {
         hotelRooms.current = new Map<RoomNumber, HotelRoom>();
@@ -109,7 +119,7 @@ function Main() {
         if (saved.hotelrooms !== null) hotelRooms.current = saved.hotelrooms as any;
         if (saved.bookedrooms !== null) bookedRooms.current = saved.bookedrooms as any;
         if (saved.checkedinrooms !== null) checkedInRooms.current = saved.checkedinrooms as any;
-        if (saved.wallet !== null) wallet.current = saved.wallet;
+        if (saved.wallet !== null) setWalletValue(saved.wallet);
 
         setRenderApp(true);
     }, []);
@@ -125,7 +135,7 @@ function Main() {
             saveAppInfo('hotelrooms', hotelRooms.current!);
             saveAppInfo('bookedrooms', bookedRooms.current!);
             saveAppInfo('checkinrooms', checkedInRooms.current!);
-            saveWallet(wallet.current);
+            saveWallet(wallet.value);
         }, 1000);
 
     }, [renderApp]);
@@ -139,7 +149,10 @@ function Main() {
                 <Routes>
                     <Route path="/" element={<Home setLoginState={setLoginState} />} />
                     <Route path="/account" element={
-                        <Account wallet={wallet.current} userName={userName} />
+                        <Account wallet={wallet} userName={userName} />
+                    } />
+                    <Route path="/account/add-balance" element={
+                        <AddBalance {...{wallet}} />
                     } />
                     <Route path="/available-rooms" element={<AvailableRooms
                         hotelRooms={hotelRooms.current!}

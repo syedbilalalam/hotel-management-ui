@@ -4,10 +4,7 @@ import PageTitle from '@src/pages/components/page_title';
 import CenteredBody from '@src/pages/components/centered_body';
 import { FormBtnPair, PrimaryBtn, SecBtn } from '@src/pages/components/form_btns';
 import { FormFieldsHolder, Input, Selection } from '@src/pages/components/form_elems';
-import {
-    useState, useRef,
-    type RefObject
-} from 'react';
+import { useState, useRef } from 'react';
 import {
     MARRIAGE_STATUS,
     HOTEL_ROOM,
@@ -17,7 +14,7 @@ import {
     type HotelRoom,
     type BookedRoom
 } from '@src/assets/components/db';
-import type { RoomDb } from '@src/main';
+import type { RoomDb, Wallet } from '@src/main';
 
 // Importing page styling
 import '@src/assets/styles/book_room.css';
@@ -34,7 +31,7 @@ export function meta() {
 interface BookRoomProps {
     hotelRooms: RoomDb<HotelRoom>
     bookedRooms: RoomDb<BookedRoom>
-    wallet: RefObject<number>;
+    wallet: Wallet;
 }
 
 export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps) {
@@ -102,7 +99,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
         let cost = 0;
         try {
             cost = calculateCost();
-            if (cost > wallet.current) {
+            if (cost > wallet.value) {
                 alert('Not enough balance in your wallet! Recharge it.');
                 return;
             }
@@ -122,7 +119,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
         ]);
 
         // Updating wallet value
-        wallet.current -= cost;
+        wallet.set(wallet.value - cost);
 
         // Updating hotel room var
         hotelRoom[HOTEL_ROOM.STATUS] = ROOM_STATUS.BOOKED;
@@ -151,7 +148,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
                     <PageTitle parentPath={'/'} text={'Book a Room'} />
                     <div className={'walletInfo'}>
                         <span>Wallet: </span>
-                        <span className={'value'}>{wallet.current}</span>
+                        <span className={'value'}>{wallet.value}</span>
                         <img src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
                     </div>
                 </div>

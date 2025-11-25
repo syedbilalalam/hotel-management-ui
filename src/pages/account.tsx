@@ -1,14 +1,15 @@
+import type { ReactNode } from 'react';
+import type { Wallet } from '@src/main';
 import Navbar from '@src/pages/components/navbar';
 import CenteredBody from '@src/pages/components/centered_body';
 import { Btn } from '@src/assets/components/btn';
-import type { ReactNode } from 'react';
 
 // Importing stylessheet
 import '@src/assets/styles/account.css';
 
 interface AccountPageProps {
     userName: string;
-    wallet: number;
+    wallet: Wallet;
 }
 
 interface OptionContainerProps {
@@ -70,7 +71,7 @@ export default function Page({ wallet, userName }: AccountPageProps) {
                             iconAlt={'Icon'}
                         >
                             <span>Wallet:</span>
-                            <span style={{fontWeight: 'bold'}}>{wallet}</span>
+                            <span style={{fontWeight: 'bold'}}>{wallet.value}</span>
                             <img className={'ico'} src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
                         </Option>
                     </div>
@@ -82,6 +83,7 @@ export default function Page({ wallet, userName }: AccountPageProps) {
                             Main Menu
                         </Option>
                         <Option
+                            target={'/account/add-balance'}
                             iconPath={'/icons/svg/add_box.svg'} iconAlt={'Icon'}
                         >
                             Add Balance

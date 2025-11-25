@@ -4,7 +4,7 @@
     text-align: center;
     border: 2px solid var(--dark-blue);
 }
-.formBtnPair .systemBtn.btn {
+.formBtnPair .larger.btn {
     width: 60%;
 }
 .primaryBtn.btn {

@@ -1,5 +1,6 @@
 import { Btn } from '@src/assets/components/btn';
 import Navbar from '@src/pages/components/navbar';
+import CenteredBody from '@src/pages/components/centered_body';
 import '@src/assets/styles/home.css';
 // Page styleing
 // import '@src/assets/styles/home.css';
@@ -78,62 +79,15 @@ function CardsHolder() {
     )
 }
 
-function OldComponent({setLoginState}: HomePageProps) {
-    return (
-        <div className="container home">
-            <div className="header">
-                <h1>The Castle of Programmers</h1>
-            </div>
-            <div className="button-group">
-                <Btn
-                    className="btn action-event"
-                    to={'/available-rooms'}
-                >Display Available Rooms</Btn>
-                <Btn
-                    className="btn action-event"
-                    to='/book-room'
-                >Book a Room</Btn>
-            </div>
-            <div className="button-group">
-                <Btn
-                    className="btn action-event"
-                    to={'/cancel-booking'}
-                >Cancel Booking</Btn>
-                <Btn
-                    className="btn action-event"
-                    to={'/booked-rooms'}
-                >Booked Rooms</Btn>
-            </div>
-            <div className="button-group">
-                <Btn
-                    className="btn action-event"
-                    to={'/check-in'}
-                >Check-In Room</Btn>
-                <Btn
-                    className="btn action-event"
-                    to={'/check-out'}
-                >Check-Out Room</Btn>
-            </div>
-            <div className="footer">
-                <button
-                    className="btn exit-btn"
-                    onClick={() => {
-                        setLoginState(false);
-                    }}
-                >Logout</button>
-            </div>
-        </div>
-    )
-}
-
 export default function Page(homePageProps: HomePageProps) {
 
     return (
         <>
             <Navbar />
-            <Title />
-            <CardsHolder />
-            { false ? (<OldComponent setLoginState={homePageProps.setLoginState}/>) : (<></>)}
+            <CenteredBody maxWidth={850}>
+                <Title />
+                <CardsHolder />
+            </CenteredBody>
         </>
     );
 }

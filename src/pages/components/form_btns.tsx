@@ -13,7 +13,7 @@ interface FormBtnPair {
 export function PrimaryBtn(props: BtnProps) {
 
     return (
-        <div className={'primaryBtn systemBtn btn'} onClick={props.onClick}>
+        <div className={'primaryBtn systemBtn larger btn'} onClick={props.onClick}>
             {props.children}
         </div>
     )

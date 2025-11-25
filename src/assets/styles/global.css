@@ -1,0 +1,39 @@
+/* Global level class */
+body {
+    font-family: inter;
+    padding: 10px;
+}
+.defaultBtn {
+    border: none;
+    outline: none;
+}
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: unset;
+}
+.imageHolder img{
+    height: 100%;
+}
+
+:root {
+  --dark-blue: #193E80;   /* your color variable */
+  --light-blue: #73DDFF;
+  --text-color: #222222;
+  --orange: #FF4800;
+  --green: #25B53B;
+  --highlight: #008cff;
+}
+.systemBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+.systemBtn .ico {
+    height: 20px;
+}
+button, input, select {
+    font-family: inter;
+}
