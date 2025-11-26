@@ -3,17 +3,18 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import './index.css'
 import Home from '@src/pages/home';
-import AvailableRooms from '@src/pages/available_rooms';
 import BookRoom from '@src/pages/book_room';
-import BookedRooms from '@src/pages/booked_rooms';
-import CancelBooking from '@src/pages/cancel_booking';
+import Login from '@src/pages/login';
+import Account from '@src/pages/account';
 import CheckIn from '@src/pages/check_in';
 import CheckOut from '@src/pages/checkout';
 import AddBalance from '@src/pages/add_balance';
+import BookedRooms from '@src/pages/booked_rooms';
+import CancelBooking from '@src/pages/cancel_booking';
+import AvailableRooms from '@src/pages/available_rooms';
+import { UserContext } from '@src/assets/components/global_context';
 import CheckInSummary, { type CheckInSummaryProps } from '@src/pages/check_in_summary';
 import CheckOutSummary, { type CheckoutSummaryProps } from '@src/pages/checkout_summary';
-import Login from '@src/pages/login';
-import Account from '@src/pages/account';
 import {
     AVAILABLE_ROOMS,
     ROOM_STATUS,
@@ -29,6 +30,10 @@ import '@src/assets/styles/global.css';
 export interface Wallet {
     value: number;
     set: (val: number) => void;
+}
+export interface Login {
+    value: boolean;
+    set: (val: boolean) => void;
 }
 
 export type RoomDb<T> = Map<RoomNumber, T>;
@@ -92,7 +97,11 @@ export function Main() {
     const wallet = {
         value: walletValue,
         set: setWalletValue
-    }
+    } as Wallet;
+    const login = {
+        value: loginState,
+        set: setLoginState
+    } as Login;
 
     useEffect(() => {
         hotelRooms.current = new Map<RoomNumber, HotelRoom>();
@@ -141,9 +150,10 @@ export function Main() {
     }, [renderApp, wallet.value]);
 
     return (
-        !loginState ? (
-            <Login {...{setLoginState, userEmail, userPassword}} />
-        ) : renderApp ? (
+        <UserContext.Provider value={{ login }}>
+            {!loginState ? (
+            <Login {...{ setLoginState, userEmail, userPassword }} />
+            ) : renderApp ? (
 
             <BrowserRouter>
                 <Routes>
@@ -152,7 +162,7 @@ export function Main() {
                         <Account wallet={wallet} userName={userName} />
                     } />
                     <Route path="/account/add-balance" element={
-                        <AddBalance {...{wallet}} />
+                        <AddBalance {...{ wallet }} />
                     } />
                     <Route path="/available-rooms" element={<AvailableRooms
                         hotelRooms={hotelRooms.current!}
@@ -192,9 +202,10 @@ export function Main() {
                     <Route path="/checkout/summary" element={<CheckOutSummary props={checkoutSummaryProps} />} />
                 </Routes>
             </BrowserRouter>
-        ) : (
+            ) : (
             <></>
-        )
+            )}
+        </UserContext.Provider>
     )
 }
 

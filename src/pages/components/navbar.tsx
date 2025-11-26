@@ -1,7 +1,11 @@
+import { useContext } from 'react';
+import { UserContext } from '@src/assets/components/global_context';
 import { Btn } from '@src/assets/components/btn';
 import '@src/assets/styles/navbar.css';
 
 export default function Component() {
+    const { login } = useContext(UserContext)!;
+
     return (
         <>
             <nav>
@@ -16,15 +20,20 @@ export default function Component() {
                 </div>
 
                 <div className={'options'}>
-                    <Btn to={'/'} className={'logout btn'}>
-                        <span>Logout</span>
-                        <div className={'ico imageHolder'}>
-                            <img src={'/icons/svg/logout.svg'} alt={'icon'} />
-                        </div>
-                    </Btn>
                     <Btn to={'/account'} className={'account btn'}>
                         <div className={'ico imageHolder'}>
                             <img src={'/icons/svg/person.svg'} alt={'icon'} />
+                        </div>
+                    </Btn>
+                    <Btn
+                        className={'logout btn'}
+                        onClick={() => {
+                            login.set(false);
+                        }}
+                    >
+                        <span>Logout</span>
+                        <div className={'ico imageHolder'}>
+                            <img src={'/icons/svg/logout.svg'} alt={'icon'} />
                         </div>
                     </Btn>
                 </div>

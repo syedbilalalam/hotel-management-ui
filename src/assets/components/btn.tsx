@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 // Props type
 interface BtnProps {
-    to: string;
     className?: string;
+    to?: string;
     type?: 'submit' | 'button';
     onClick?: (e: unknown) => void;
     children?: ReactNode;
@@ -20,7 +20,7 @@ export function Btn(
             {...props}
             onClick={(e) => {
                 onClick?.(e);
-                nav(to);
+                if (to) nav(to);
             }}
         >{children}</button>
     );

@@ -3,6 +3,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 10px;
 }
 nav .title {
     display: flex;
@@ -46,4 +47,7 @@ nav .options .logout .ico {
 
 nav .options .account .ico {
     height: 32px;
+    border: 2px solid var(--dark-blue);
+    border-radius: 5px;
+    padding: 0 10px;
 }

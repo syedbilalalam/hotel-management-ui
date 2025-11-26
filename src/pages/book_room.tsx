@@ -136,7 +136,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
     return (
         <div className={'bookRoom'}>
             <Navbar />
-            <CenteredBody maxWidth={600}>
+            <CenteredBody maxWidth={660}>
                 <div className={'miniNav'}>
                     <PageTitle parentPath={'/'} text={'Book a Room'} />
                     <div className={'walletInfo'}>
