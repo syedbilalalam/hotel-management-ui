@@ -27,25 +27,24 @@ function FaceId(props: FaceIdProps) {
     const stream = useRef<MediaStream>(null);
     const scanInterval = useRef<number>(null);
     const scanAnimationElem = useRef<HTMLDivElement>(null);
-
-    const startCamera = async () => {
-        try {
-            stream.current = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: 'user' },  // or { facingMode: "user" } for front camera (mobile)
-                audio: false
-            });
-
-            vidElem.current!.srcObject = stream.current; // Set camera stream
-            setScanState(true);
-        } catch {
-            alert('Camera not found!');
-            props.setFaceIdPage(false);
-        }
-    }
-
+    
     useEffect(() => {
+        const startCamera = async () => {
+            try {
+                stream.current = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'user' },  // or { facingMode: "user" } for front camera (mobile)
+                    audio: false
+                });
+    
+                vidElem.current!.srcObject = stream.current; // Set camera stream
+                setScanState(true);
+            } catch {
+                alert('Camera not found!');
+                props.setFaceIdPage(false);
+            }
+        }
         startCamera();
-    }, []);
+    }, [props]);
 
     useEffect(() => {
         if (cameraState) return;
@@ -56,7 +55,7 @@ function FaceId(props: FaceIdProps) {
         // Switching back to login page
         setScanState(false);
         props.setFaceIdPage(false);
-    }, [cameraState]);
+    }, [cameraState, props]);
 
     useEffect(() => {
         console.log(scanState);
