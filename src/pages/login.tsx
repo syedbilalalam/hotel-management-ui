@@ -58,7 +58,6 @@ function FaceId(props: FaceIdProps) {
     }, [cameraState, props]);
 
     useEffect(() => {
-        console.log(scanState);
         if (scanState && !errorMsg) {
             let count = 0;
 
@@ -123,8 +122,6 @@ function Login(props: LoginProps) {
         <div className="login-container">
             <form onSubmit={(e) => {
                 e.preventDefault();
-                console.log("Email:", email);
-                console.log("Password:", password);
 
                 if (email === props.userEmail && password === props.userPassword) {
                     props.setLoginState(true);
