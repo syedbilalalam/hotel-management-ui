@@ -59,9 +59,82 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
 
+.login-button.faceid {
+  background-color: #ff8c00;
+}
+.login-button.faceid:hover {
+  background-color: #cf7200;
+}
 /* Hover effect */
 .login-button:hover {
   background-color: #2563eb;
+}
+
+/* Face id page styling */
+.faceIdComp .title {
+  font-size: 22px;
+  color: var(--dark-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.faceIdComp .centeredBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  margin-top: 40px;
+}
+.faceIdComp .camContainer {
+  border: 2px solid var(--dark-blue);
+  border-radius: 250px;
+  height: 100vh;
+  width: 100%;
+  max-height: 300px;
+  max-width: 300px;
+  overflow: hidden;
+}
+.faceIdComp .errorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--light-yellow);
+  padding: 20px;
+  border-radius: 20px;
+}
+.faceIdComp .error {
+  display: flex;
+  align-items: center;
+  color: var(--orange);
+  gap: 10px;
+}
+.faceIdComp .backLogin {
+  width: 100%;
+  max-width: 500px;
+}
+.faceIdComp .backLogin .btn{
+  width: 100%;
+}
+.faceIdComp .camContainer .camBorder {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+.faceIdComp .camContainer .camBorder.focus {
+  background-color: var(--dark-blue);
+}
+#cam {
+  display: block;
+  height: 94%;
+  width: 94%;
+  object-fit: cover;
+  border-radius: 250px;
 }

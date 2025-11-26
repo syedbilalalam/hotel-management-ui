@@ -24,6 +24,7 @@ body {
   --orange: #FF4800;
   --green: #25B53B;
   --highlight: #008cff;
+  --light-yellow: #ffffe0;
 }
 .systemBtn {
     display: flex;
