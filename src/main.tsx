@@ -151,7 +151,7 @@ export function Main() {
 
     return (
         <UserContext.Provider value={{ login }}>
-            {loginState ? (
+            {!loginState ? (
                 <Login {...{ setLoginState, userEmail, userPassword }} />
             ) : renderApp ? (
                 <>
