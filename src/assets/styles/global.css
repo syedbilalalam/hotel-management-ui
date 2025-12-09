@@ -17,6 +17,29 @@ body {
     height: 100%;
 }
 
+/* Background Image */
+.backgroundImage {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    filter: blur(2px);
+}
+.backgroundImage img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+.foregroundContent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
 :root {
   --dark-blue: #193E80;   /* your color variable */
   --light-blue: #73DDFF;

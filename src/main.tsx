@@ -151,59 +151,67 @@ export function Main() {
 
     return (
         <UserContext.Provider value={{ login }}>
-            {!loginState ? (
-            <Login {...{ setLoginState, userEmail, userPassword }} />
+            {loginState ? (
+                <Login {...{ setLoginState, userEmail, userPassword }} />
             ) : renderApp ? (
+                <>
+                    <div className={'backgroundImage'}>
+                        <img src={'/images/background.png'} alt={''} />
+                    </div>
+                    <div className={'foregroundContent'}>
 
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/account" element={
-                        <Account wallet={wallet} userName={userName} />
-                    } />
-                    <Route path="/account/add-balance" element={
-                        <AddBalance {...{ wallet }} />
-                    } />
-                    <Route path="/available-rooms" element={<AvailableRooms
-                        hotelRooms={hotelRooms.current!}
-                    />} />
-                    <Route
-                        path="/book-room" element={
-                            <BookRoom
-                                bookedRooms={bookedRooms.current!}
-                                hotelRooms={hotelRooms.current!}
-                                wallet={wallet}
-                            />
-                        }
-                    />
-                    <Route path="/booked-rooms" element={<BookedRooms
-                        bookedRooms={bookedRooms.current!}
-                        hotelRooms={hotelRooms.current!}
-                    />} />
-                    <Route path="/cancel-booking" element={<CancelBooking
-                        bookedRooms={bookedRooms.current!}
-                        hotelRooms={hotelRooms.current!}
-                    />} />
-                    <Route path="/check-in" element={<CheckIn
-                        setSummaryProps={setCheckinSummaryProps}
-                        hotelRooms={hotelRooms.current!}
-                        checkedInRooms={checkedInRooms.current!}
-                        bookedRooms={bookedRooms.current!}
-                    />} />
-                    <Route path="/check-in/summary" element={<CheckInSummary
-                        props={checkinSummaryProps}
-                        checkedInRooms={checkedInRooms.current!}
-                        bookedRooms={bookedRooms.current!}
-                    />} />
-                    <Route path="/checkout" element={<CheckOut
-                        setSummaryProps={setCheckoutSummaryProps} bookedRooms={bookedRooms.current!}
-                        hotelRooms={hotelRooms.current!} checkedInRooms={checkedInRooms.current!}
-                    />} />
-                    <Route path="/checkout/summary" element={<CheckOutSummary props={checkoutSummaryProps} />} />
-                </Routes>
-            </BrowserRouter>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/account" element={
+                                    <Account wallet={wallet} userName={userName} />
+                                } />
+                                <Route path="/account/add-balance" element={
+                                    <AddBalance {...{ wallet }} />
+                                } />
+                                <Route path="/available-rooms" element={<AvailableRooms
+                                    hotelRooms={hotelRooms.current!}
+                                />} />
+                                <Route
+                                    path="/book-room" element={
+                                        <BookRoom
+                                            bookedRooms={bookedRooms.current!}
+                                            hotelRooms={hotelRooms.current!}
+                                            wallet={wallet}
+                                        />
+                                    }
+                                />
+                                <Route path="/booked-rooms" element={<BookedRooms
+                                    bookedRooms={bookedRooms.current!}
+                                    hotelRooms={hotelRooms.current!}
+                                />} />
+                                <Route path="/cancel-booking" element={<CancelBooking
+                                    bookedRooms={bookedRooms.current!}
+                                    hotelRooms={hotelRooms.current!}
+                                />} />
+                                <Route path="/check-in" element={<CheckIn
+                                    setSummaryProps={setCheckinSummaryProps}
+                                    hotelRooms={hotelRooms.current!}
+                                    checkedInRooms={checkedInRooms.current!}
+                                    bookedRooms={bookedRooms.current!}
+                                />} />
+                                <Route path="/check-in/summary" element={<CheckInSummary
+                                    props={checkinSummaryProps}
+                                    checkedInRooms={checkedInRooms.current!}
+                                    bookedRooms={bookedRooms.current!}
+                                />} />
+                                <Route path="/checkout" element={<CheckOut
+                                    setSummaryProps={setCheckoutSummaryProps} bookedRooms={bookedRooms.current!}
+                                    hotelRooms={hotelRooms.current!} checkedInRooms={checkedInRooms.current!}
+                                />} />
+                                <Route path="/checkout/summary" element={<CheckOutSummary props={checkoutSummaryProps} />} />
+                            </Routes>
+                        </BrowserRouter>
+                    </div>
+                </>
+
             ) : (
-            <></>
+                <></>
             )}
         </UserContext.Provider>
     )

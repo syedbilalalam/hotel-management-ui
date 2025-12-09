@@ -3,4 +3,8 @@
     margin: 0 auto;
     margin-bottom: 100px;
     padding: 10px;
+    /* background-color: #ffffff82; */
+    background-image: linear-gradient(#ffffff82, #fff);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }

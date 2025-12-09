@@ -4,6 +4,7 @@ nav {
     align-items: center;
     width: 100%;
     padding: 10px;
+    background-color: #ffffff82;
 }
 nav .title {
     display: flex;
