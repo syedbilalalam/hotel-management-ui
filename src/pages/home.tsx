@@ -44,16 +44,16 @@ function CardsHolder() {
                 iconUrl={'/icons/svg/bookmark_add.svg'}
                 linksTo={'/book-room'}
             />
-            {/* <Card
+            <Card
                 text={'Cancel Booking'}
                 iconUrl={'/icons/svg/bookmark_remove.svg'}
                 linksTo={'/cancel-booking'}
-            /> */}
-            {/* <Card
+            />
+            <Card
                 text={'Booked Rooms'}
                 iconUrl={'/icons/svg/book.svg'}
                 linksTo={'/booked-rooms'}
-            /> */}
+            />
             <Card
                 text={'Check In'}
                 iconUrl={'/icons/svg/receipt_long.svg'}

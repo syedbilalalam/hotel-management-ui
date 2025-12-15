@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { PaymentState } from './book_room';
 import Navbar from '@src/pages/components/navbar';
 import PageTitle from '@src/pages/components/page_title';
 import CenteredBody from '@src/pages/components/centered_body';
@@ -11,13 +12,14 @@ import type { Wallet } from '@src/main';
 import '@src/assets/styles/add_balance.css';
 
 interface AddBalanceProps {
-    wallet: Wallet
+    amount: number;
+    paymentState: PaymentState;
 }
 
-export default function Page({ wallet }: AddBalanceProps) {
+export default function Payment(props: AddBalanceProps) {
     const nav = useNavigate();
 
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(props.amount);
     const [cardNumber, setCardNumber] = useState<number | null>(null);
     const [cardHolderName, setCardHolderName] = useState('');
     const [cvc, setCvc] = useState(0);
@@ -41,26 +43,26 @@ export default function Page({ wallet }: AddBalanceProps) {
             return;
         }
 
-        // Now updating the balance
-        wallet.set(wallet.value + amount);
-        alert('Successfully added balance!');
-        nav('/account');
+        // Now validating payment process
+        props.paymentState.set((prev) => {
+            prev!.status = 'SUCCESS';
+            return {...prev!};
+        })
     }
 
     return (
         <>
-            <Navbar />
-
             <CenteredBody maxWidth={700}>
-                <PageTitle text={'Add Balance'} parentPath={'/account'} />
+                <PageTitle text={'Card Payment'} parentPath={'/account'} />
                 <FormFieldsHolder>
                     <Input
-                        id={'amount'} title={'Enter Amount'}
-                        placeholder={'Enter your amount here'}
+                        id={'amount'} title={'Amount'}
+                        placeholder={'Total cost in $'}
                         type={'number'}
-                        onInput={(e) => {
-                            setAmount(parseInt((e.target as HTMLInputElement).value));
+                        onInput={() => {
+                            setAmount(props.amount); // Forcing not to change the amount value by user actions
                         }}
+                        value={amount.toString()}
                         required={true}
                     />
                     <Input
@@ -90,12 +92,7 @@ export default function Page({ wallet }: AddBalanceProps) {
                     />
                 </FormFieldsHolder>
                 <FormBtnPair>
-                    <PrimaryBtn onClick={processRequest}>
-                        <span>Add Balance</span>
-                        <div className={'imageHolder ico'}>
-                            <img src={'/icons/svg/add.svg'} alt={'icon'} />
-                        </div>
-                    </PrimaryBtn>
+                    <PrimaryBtn onClick={processRequest}>Proceed</PrimaryBtn>
                     <SecBtn onClick={() => { nav('/account'); }}>Cancel</SecBtn>
                 </FormBtnPair>
             </CenteredBody>

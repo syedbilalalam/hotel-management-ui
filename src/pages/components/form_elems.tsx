@@ -19,6 +19,7 @@ interface InputProps {
         | 'email'
         | 'date';
     width?: number;
+    value?: string;
     onInput?: FormEventHandler<HTMLInputElement>;
     required?: boolean;
 }
@@ -82,6 +83,7 @@ export function Input({
                 placeholder={placeholder}
                 style={{ maxWidth }}
                 onInput={onInput}
+                value={props.value}
                 required={required}
             />
         </div>

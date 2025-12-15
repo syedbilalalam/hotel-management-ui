@@ -1,3 +1,8 @@
+.bookedRooms .content{
+    /* background-image: linear-gradient() */
+    /* background-color: #fff; */
+    background-image: linear-gradient(#ffffff82, #fff);
+}
 .bookedRooms .titleContainer {
     padding: 20px 0 0 20px;
 }
@@ -56,4 +61,7 @@
 }
 .bookedRoomCard .infoContainer .right .cost img {
     height: 18px;
+}
+.bookedRooms .content .cardsContainer .noRoomsMsg {
+    padding: 22px;
 }

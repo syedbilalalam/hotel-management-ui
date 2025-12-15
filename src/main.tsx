@@ -8,7 +8,6 @@ import Login from '@src/pages/login';
 import Account from '@src/pages/account';
 import CheckIn from '@src/pages/check_in';
 import CheckOut from '@src/pages/checkout';
-import AddBalance from '@src/pages/add_balance';
 import BookedRooms from '@src/pages/booked_rooms';
 import CancelBooking from '@src/pages/cancel_booking';
 import AvailableRooms from '@src/pages/available_rooms';
@@ -151,7 +150,7 @@ export function Main() {
 
     return (
         <UserContext.Provider value={{ login }}>
-            {!loginState ? (
+            {loginState ? (
                 <Login {...{ setLoginState, userEmail, userPassword }} />
             ) : renderApp ? (
                 <>
@@ -166,9 +165,9 @@ export function Main() {
                                 <Route path="/account" element={
                                     <Account wallet={wallet} userName={userName} />
                                 } />
-                                <Route path="/account/add-balance" element={
+                                {/* <Route path="/account/add-balance" element={
                                     <AddBalance {...{ wallet }} />
-                                } />
+                                } /> */}
                                 <Route path="/available-rooms" element={<AvailableRooms
                                     hotelRooms={hotelRooms.current!}
                                 />} />

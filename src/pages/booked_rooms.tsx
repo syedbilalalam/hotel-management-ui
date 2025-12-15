@@ -91,32 +91,34 @@ export default function Page(props: BookedRoomsProps) {
     return (
         <div className={'bookedRooms'}>
             <Navbar />
-            <div className={'titleContainer'}>
-                <PageTitle parentPath={'/'} text={'Booked Rooms'} />
-            </div>
-            <div className={'cardsContainer'}>
-                {
-                    rooms.length ? (rooms.map(data => {
+            <div className={'content'}>
+                <div className={'titleContainer'}>
+                    <PageTitle parentPath={'/'} text={'Booked Rooms'} />
+                </div>
+                <div className={'cardsContainer'}>
+                    {
+                        rooms.length ? (rooms.map(data => {
 
-                        const roomType = data.roomType === ROOM_TYPE.SINGLE ? 'Single' : 'Double';
-                        const price = ROOM_PRICE[data.roomType === ROOM_TYPE.SINGLE ? 'SINGLE' : 'DOUBLE'] * data.duration;
+                            const roomType = data.roomType === ROOM_TYPE.SINGLE ? 'Single' : 'Double';
+                            const price = ROOM_PRICE[data.roomType === ROOM_TYPE.SINGLE ? 'SINGLE' : 'DOUBLE'] * data.duration;
 
-                        return (
-                            
-                            <Card
-                                roomNo={data.roomNumber}
-                                roomType={roomType}
-                                guestName={data.name}
-                                phoneNo={data.phone}
-                                email={data.email}
-                                duration={data.duration}
-                                totalCost={price}
-                            />
-                        );
-                    })) : (
-                        <p>No rooms are currently booked.</p>
-                    )
-                }
+                            return (
+                                
+                                <Card
+                                    roomNo={data.roomNumber}
+                                    roomType={roomType}
+                                    guestName={data.name}
+                                    phoneNo={data.phone}
+                                    email={data.email}
+                                    duration={data.duration}
+                                    totalCost={price}
+                                />
+                            );
+                        })) : (
+                            <p className={'noRoomsMsg'}>No rooms are currently booked.</p>
+                        )
+                    }
+                </div>
             </div>
         </div>
     );
