@@ -103,10 +103,6 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
         let cost = 0;
         try {
             cost = calculateCost();
-            if (cost > wallet.value) {
-                alert('Not enough balance in your wallet! Recharge it.');
-                return;
-            }
         }
         catch {
             alert('Something went wrong!');

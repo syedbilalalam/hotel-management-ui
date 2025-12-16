@@ -81,7 +81,7 @@ export function Main() {
     const [checkoutSummaryProps, setCheckoutSummaryProps] = useState<CheckoutSummaryProps | null>(null);
     const [renderApp, setRenderApp] = useState(false);
     const [loginState, setLoginState] = useState(false);
-    const [walletValue, setWalletValue] = useState(100);
+    const [walletValue, setWalletValue] = useState(0);
     // User info
     const userName = 'Administrator';
     const userEmail = 'admin@ourhotel.com';
