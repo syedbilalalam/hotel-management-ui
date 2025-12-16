@@ -97,7 +97,7 @@ export default function Page(props: BookedRoomsProps) {
                 </div>
                 <div className={'cardsContainer'}>
                     {
-                        rooms.length ? (rooms.map(data => {
+                        rooms.length ? (rooms.map((data, index) => {
 
                             const roomType = data.roomType === ROOM_TYPE.SINGLE ? 'Single' : 'Double';
                             const price = ROOM_PRICE[data.roomType === ROOM_TYPE.SINGLE ? 'SINGLE' : 'DOUBLE'] * data.duration;
@@ -105,6 +105,7 @@ export default function Page(props: BookedRoomsProps) {
                             return (
                                 
                                 <Card
+                                    key={index}
                                     roomNo={data.roomNumber}
                                     roomType={roomType}
                                     guestName={data.name}
