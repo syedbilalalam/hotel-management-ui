@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { PaymentState } from './book_room';
-import Navbar from '@src/pages/components/navbar';
 import PageTitle from '@src/pages/components/page_title';
 import CenteredBody from '@src/pages/components/centered_body';
 import { Input, FormFieldsHolder } from '@src/pages/components/form_elems';
 import { PrimaryBtn, SecBtn, FormBtnPair } from '@src/pages/components/form_btns';
-import type { Wallet } from '@src/main';
 
 // Importing stylessheet
 import '@src/assets/styles/add_balance.css';

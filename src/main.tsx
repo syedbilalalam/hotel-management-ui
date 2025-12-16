@@ -83,9 +83,9 @@ export function Main() {
     const [loginState, setLoginState] = useState(false);
     const [walletValue, setWalletValue] = useState(100);
     // User info
-    const userName = 'Test User';
-    const userEmail = 'testuser@edu.pk';
-    const userPassword = 'pakistan123';
+    const userName = 'Administrator';
+    const userEmail = 'admin@ourhotel.com';
+    const userPassword = 'hotelcms365';
 
     const hotelRooms = useRef<RoomDb<HotelRoom>>(null);
     const bookedRooms = useRef<RoomDb<BookedRoom>>(null);
@@ -150,7 +150,7 @@ export function Main() {
 
     return (
         <UserContext.Provider value={{ login }}>
-            {loginState ? (
+            {!loginState ? (
                 <Login {...{ setLoginState, userEmail, userPassword }} />
             ) : renderApp ? (
                 <>
@@ -165,9 +165,6 @@ export function Main() {
                                 <Route path="/account" element={
                                     <Account wallet={wallet} userName={userName} />
                                 } />
-                                {/* <Route path="/account/add-balance" element={
-                                    <AddBalance {...{ wallet }} />
-                                } /> */}
                                 <Route path="/available-rooms" element={<AvailableRooms
                                     hotelRooms={hotelRooms.current!}
                                 />} />

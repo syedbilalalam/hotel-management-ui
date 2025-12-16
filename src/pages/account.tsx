@@ -70,7 +70,7 @@ export default function Page({ wallet, userName }: AccountPageProps) {
                             iconPath={'/icons/svg/wallet.svg'}
                             iconAlt={'Icon'}
                         >
-                            <span>Wallet:</span>
+                            <span>Total Profit:</span>
                             <span style={{fontWeight: 'bold'}}>{wallet.value}</span>
                             <img className={'ico'} src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
                         </Option>
@@ -82,12 +82,12 @@ export default function Page({ wallet, userName }: AccountPageProps) {
                         >
                             Main Menu
                         </Option>
-                        <Option
+                        {/* <Option
                             target={'/account/add-balance'}
                             iconPath={'/icons/svg/add_box.svg'} iconAlt={'Icon'}
                         >
                             Add Balance
-                        </Option>
+                        </Option> */}
                     </div>
                 </div>
             </CenteredBody>

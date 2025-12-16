@@ -150,7 +150,7 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
         alert('Sucessfully booked');
 
         nav('/');
-    }, [paymentProcess]);
+    }, [paymentProcess, nav, wallet]);
 
     return (
         <div className={'bookRoom'}>
