@@ -160,11 +160,11 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
                 <CenteredBody maxWidth={660}>
                     <div className={'miniNav'}>
                         <PageTitle parentPath={'/'} text={'Book a Room'} />
-                        <div className={'walletInfo'}>
+                        {/* <div className={'walletInfo'}>
                             <span>Wallet: </span>
                             <span className={'value'}>{wallet.value}</span>
                             <img src={'/icons/svg/monetization_on.svg'} alt={'icon'} />
-                        </div>
+                        </div> */}
                     </div>
                     <form ref={formElem}>
 
