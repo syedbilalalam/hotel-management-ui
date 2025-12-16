@@ -138,7 +138,8 @@ export default function Page({ hotelRooms, bookedRooms, wallet }: BookRoomProps)
 
     useEffect(() => {
         if (paymentProcess === null || paymentProcess.status !== 'SUCCESS') return;
-
+        setPaymentProcess(null);
+        
         wallet.set(wallet.value + paymentProcess.amount);
         
         // Updating hotel room var
